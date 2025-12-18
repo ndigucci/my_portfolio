@@ -260,7 +260,9 @@ function App() {
             <div className="h-8 md:h-12 text-lg md:text-2xl text-gray-400 font-mono mb-8 flex justify-center md:justify-start items-center">
               <span className="text-cyan-500 mr-2">$</span>
               <Typewriter text="Pharmacy Student | AI Enthusiast" delay={55} />
+              <span className="animate-pulse ml-1">_</span>
               <Typewriter text="Healthcare Innovator | Side hustle advisor" delay={55} />
+              <span className="animate-pulse ml-1">_</span>
               <Typewriter text="WEB developer | WEB designer" delay={55} />
               <span className="animate-pulse ml-1">_</span>
             </div>
