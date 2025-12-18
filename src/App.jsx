@@ -260,6 +260,8 @@ function App() {
             <div className="h-8 md:h-12 text-lg md:text-2xl text-gray-400 font-mono mb-8 flex justify-center md:justify-start items-center">
               <span className="text-cyan-500 mr-2">$</span>
               <Typewriter text="Pharmacy Student | AI Enthusiast" delay={55} />
+              <Typewriter text="Healthcare Innovator | Side hustle advisor" delay={55} />
+              <Typewriter text="WEB developer | WEB designer" delay={55} />
               <span className="animate-pulse ml-1">_</span>
             </div>
             <p className="text-gray-400 text-lg mb-10 leading-relaxed max-w-2xl mx-auto md:mx-0">
@@ -309,7 +311,7 @@ function App() {
               <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition"><span className="text-2xl">⚡️</span></div>
               <h3 className="text-xl font-bold text-white mb-4">Productivity</h3>
               <div className="flex flex-wrap gap-2">
-                {['Mendeley', 'PowerPoint', 'Office 365', 'Digital Workflows'].map(skill => (
+                {['Mendeley', 'PowerPoint', 'Office 365', 'Digital Workflows','Power BI'].map(skill => (
                   <span key={skill} className="text-xs font-mono px-2 py-1 bg-gray-800 text-purple-400 rounded border border-gray-700">{skill}</span>
                 ))}
               </div>
@@ -362,12 +364,12 @@ function App() {
       {/* --- CONTACT SECTION --- */}
       <section id="contact" className="py-24 px-4 text-center relative overflow-hidden">
         <div className="max-w-2xl mx-auto relative z-10">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">What's Next?</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Lets work together</h2>
           <p className="text-gray-400 text-lg mb-10">
             I am currently looking for opportunities to apply my skills in <span className="text-cyan-400">Digital Health</span> and <span className="text-cyan-400">Cybersecurity</span>.
           </p>
           <a href="mailto:irumvabonheur@icloud.com" className="px-8 py-3 bg-transparent border-2 border-white/20 hover:bg-white/10 text-white font-bold rounded-xl transition duration-200 text-center">
-            Lets work together!
+            contact me 
           </a>
         </div>
       </section>
@@ -375,7 +377,9 @@ function App() {
       <footer className="py-8 text-center text-gray-600 text-sm bg-black border-t border-gray-900">
         <p className="font-mono mb-2">Designed & Built by NDI GUCCI</p>
         <div className="flex justify-center gap-4 mt-4">
-          <a href="https://github.com/ndigucci" className="hover:text-cyan-400 transition">GitHub Twitter Linkedin</a>
+          <a href="https://github.com/ndigucci" className="hover:text-cyan-400 transition">GitHub</a>
+          <a href="https://linkedin.com/in/ndigucci" className="hover:text-cyan-400 transition">LinkedIn</a>
+          <a href="https://twitter.com/ndigucci" className="hover:text-cyan-400 transition">Twitter</a>
         </div>
       </footer>
     </div>
