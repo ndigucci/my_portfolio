@@ -379,7 +379,7 @@ function App() {
         <div className="flex justify-center gap-4 mt-4">
           <a href="https://github.com/ndigucci" className="hover:text-cyan-400 transition">GitHub</a>
           <a href="https://linkedin.com/in/ndigucci" className="hover:text-cyan-400 transition">LinkedIn</a>
-          <a href="https://twitter.com/ndigucci" className="hover:text-cyan-400 transition">Twitter</a>
+          <a href="https://twitter.com/jyakuryama" className="hover:text-cyan-400 transition">Twitter</a>
         </div>
       </footer>
     </div>
