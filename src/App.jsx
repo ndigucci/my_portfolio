@@ -222,7 +222,7 @@ function App() {
       <section id="projects" className="py-24 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 flex items-center">
-            <span className="text-cyan-500 mr-3">02.</span> Selected Projects
+            <span className="text-cyan-500 mr-3">Vist</span>Projects`s certicicates i worked on
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -274,7 +274,7 @@ function App() {
       {/* --- CONTACT SECTION --- */}
       <section id="contact" className="py-24 px-4 text-center relative overflow-hidden">
         <div className="max-w-2xl mx-auto relative z-10">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Lets work together🤝</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Lets work with AMINA together🤝</h2>
           <p className="text-gray-400 text-lg mb-10">
             I am currently looking for opportunities to apply my skills in <span className="text-cyan-400">Digital Health</span> and <span className="text-cyan-400">Cybersecurity</span>.
           </p>
