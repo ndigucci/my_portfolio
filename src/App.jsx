@@ -109,7 +109,7 @@ function App() {
             {/* Glowing effect behind photo */}
             <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-full blur opacity-30 group-hover:opacity-70 transition duration-1000 group-hover:duration-200"></div>
             
-            <div className="w-64 h-64 md:w-80 md:h-80 relative rounded-full overflow-hidden border-4 border-cyan-500/50 shadow-2xl bg-black">
+            <div className="w-60 h-60 md:w-70 md:h-70 relative rounded-full overflow-hidden border-4 border-cyan-500/50 shadow-2xl bg-black">
               <img 
                 src="/me.jpg" 
                 alt="Bonheur Profile" 
@@ -274,7 +274,7 @@ function App() {
       {/* --- CONTACT SECTION --- */}
       <section id="contact" className="py-24 px-4 text-center relative overflow-hidden">
         <div className="max-w-2xl mx-auto relative z-10">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">What's Next?</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Lets work together🤝</h2>
           <p className="text-gray-400 text-lg mb-10">
             I am currently looking for opportunities to apply my skills in <span className="text-cyan-400">Digital Health</span> and <span className="text-cyan-400">Cybersecurity</span>.
           </p>
@@ -282,7 +282,7 @@ function App() {
             href="mailto:irumvabonheur@icloud.com"
             className="px-8 py-3 bg-transparent border-2 border-white/20 hover:bg-white/10 text-white font-bold rounded-xl transition duration-200 text-center"
           >
-            Lets work together!
+            contact me
           </a>
         </div>
       </section>
