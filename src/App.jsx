@@ -360,15 +360,71 @@ function App() {
       </section>
 
       {/* --- CONTACT SECTION --- */}
-      <section id="contact" className="py-24 px-4 text-center relative overflow-hidden">
-        <div className="max-w-2xl mx-auto relative z-10">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Lets work together</h2>
-          <p className="text-gray-400 text-lg mb-10">
-            I am currently looking for opportunities to apply my skills in <span className="text-cyan-400">Digital Health</span> and <span className="text-cyan-400">Cybersecurity</span>.
-          </p>
-          <a href="mailto:irumvabonheur@icloud.com" className="px-8 py-3 bg-transparent border-2 border-white/20 hover:bg-white/10 text-white font-bold rounded-xl transition duration-200 text-center">
-            contact me 
-          </a>
+     {/* --- CONTACT SECTION (UPDATED WITH REAL FORM) --- */}
+      <section id="contact" className="py-24 px-4 relative overflow-hidden">
+        <div className="max-w-4xl mx-auto relative z-10">
+          
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Let's Connect</h2>
+            <p className="text-gray-400 text-lg">
+              Have a project in mind? Looking for a <span className="text-cyan-400">Security Analyst</span> or <span className="text-cyan-400">Researcher</span>? 
+              Send me a message directly.
+            </p>
+          </div>
+
+          <div className="bg-[#111] p-8 md:p-12 rounded-3xl border border-gray-800 shadow-2xl relative">
+             {/* Glow effect behind the form */}
+            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px]"></div>
+            
+            <form action="https://api.web3forms.com/submit" method="POST" className="space-y-6 relative z-10">
+              
+              {/* REPLACE THIS WITH YOUR ACCESS KEY from Web3Forms */}
+              <input type="hidden" name="access_key" value="30457cd9-af59-4f98-8cf8-f970488fbd7e" />
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-sm font-mono text-cyan-500">_name</label>
+                  <input 
+                    type="text" 
+                    name="name" 
+                    required 
+                    placeholder="Enter your name"
+                    className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-mono text-cyan-500">_email</label>
+                  <input 
+                    type="email" 
+                    name="email" 
+                    required 
+                    placeholder="name@example.com"
+                    className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-mono text-cyan-500">_message</label>
+                <textarea 
+                  name="message" 
+                  required 
+                  rows="5" 
+                  placeholder="Type your message here..."
+                  className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                ></textarea>
+              </div>
+
+              <button 
+                type="submit" 
+                className="w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-lg transition-all shadow-lg transform hover:-translate-y-1"
+              >
+                // SEND TRANSMISSION
+              </button>
+
+            </form>
+          </div>
+
         </div>
       </section>
 
