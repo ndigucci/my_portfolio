@@ -322,7 +322,7 @@ function App() {
       <section id="projects" className="py-24 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 flex items-center">
-            <span className="text-cyan-500 mr-3">02.</span> Selected Projects
+            <span className="text-cyan-500 mr-3">Vist.</span> My Projects
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -375,7 +375,7 @@ function App() {
       <footer className="py-8 text-center text-gray-600 text-sm bg-black border-t border-gray-900">
         <p className="font-mono mb-2">Designed & Built by NDI GUCCI</p>
         <div className="flex justify-center gap-4 mt-4">
-          <a href="https://github.com/ndigucci" className="hover:text-cyan-400 transition">GitHub</a>
+          <a href="https://github.com/ndigucci" className="hover:text-cyan-400 transition">GitHub Twitter Linkedin</a>
         </div>
       </footer>
     </div>
