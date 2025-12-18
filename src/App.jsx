@@ -383,7 +383,7 @@ function App() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-mono text-cyan-500">_name</label>
+                  <label className="text-sm font-mono text-cyan-500">Name</label>
                   <input 
                     type="text" 
                     name="name" 
@@ -393,7 +393,7 @@ function App() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-mono text-cyan-500">_email</label>
+                  <label className="text-sm font-mono text-cyan-500">Email</label>
                   <input 
                     type="email" 
                     name="email" 
@@ -405,7 +405,7 @@ function App() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-mono text-cyan-500">_message</label>
+                <label className="text-sm font-mono text-cyan-500">Message</label>
                 <textarea 
                   name="message" 
                   required 
@@ -419,7 +419,7 @@ function App() {
                 type="submit" 
                 className="w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-lg transition-all shadow-lg transform hover:-translate-y-1"
               >
-                // SEND TRANSMISSION
+                Get in Touch
               </button>
 
             </form>
