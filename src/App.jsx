@@ -261,10 +261,6 @@ function App() {
               <span className="text-cyan-500 mr-2">$</span>
               <Typewriter text="Pharmacy Student | AI Enthusiast" delay={55} />
               <span className="animate-pulse ml-1">_</span>
-              <Typewriter text="Healthcare Innovator | Side hustle advisor" delay={55} />
-              <span className="animate-pulse ml-1">_</span>
-              <Typewriter text="WEB developer | WEB designer" delay={55} />
-              <span className="animate-pulse ml-1">_</span>
             </div>
             <p className="text-gray-400 text-lg mb-10 leading-relaxed max-w-2xl mx-auto md:mx-0">
               I bridge the gap between <span className="text-white font-semibold">Healthcare</span> and <span className="text-white font-semibold">Technology</span>, building digital solutions that enhance safety and efficiency in Africa and beyond.
