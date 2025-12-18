@@ -280,7 +280,7 @@ function App() {
           </p>
           <a 
             href="mailto:irumvabonheur@icloud.com"
-            className="px-8 py-3 bg-transparent border-2 border-white/20 hover:bg-white/10 text-white font-bold rounded-xl transition duration-200 text-center"
+            className="px-8 py-3 bg-green border-2 border-white/20 hover:bg-white/10 text-white font-bold rounded-xl transition duration-200 text-center"
           >
             contact me
           </a>
