@@ -22,7 +22,7 @@ const Terminal = ({ onClose }) => {
       switch (cmd) {
         case 'help': response = 'Available commands: help, whoami, skills, contact, clear, exit'; break;
         case 'whoami': response = 'User: Guest | Role: Recruiter/Visitor | Access: Restricted'; break;
-        case 'skills': response = '加载中... Python, Kali Linux, Wireshark, Burp Suite, Metasploit'; break;
+        case 'skills': response = 'Loading... Python, Kali Linux, Wireshark, Burp Suite, Metasploit'; break;
         case 'contact': response = 'Email: irumvabonheur@icloud.com | Status: Open to work'; break;
         case 'clear': setHistory([]); setInput(''); return;
         case 'exit': onClose(); return;
@@ -57,7 +57,7 @@ const Terminal = ({ onClose }) => {
 
 // --- COMPONENT: RESEARCH MODAL ---
 const ResearchModal = ({ project, onClose }) => (
-  <div className="bg-zinc-900 w-full h-full p-8 rounded-lg border border-gray-700 overflow-y-auto relative">
+  <div className="bg-zinc-900 w-full h-full p-8 rounded-lg border border-gray-700 overflow-y-auto relative text-left">
     <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">✖</button>
     <div className="mb-6">
       <div className={`inline-block px-3 py-1 rounded-full text-xs font-mono mb-4 bg-${project.color}-500/10 text-${project.color}-400 border border-${project.color}-500/20`}>
@@ -81,9 +81,146 @@ const ResearchModal = ({ project, onClose }) => (
   </div>
 );
 
+// --- COMPONENT: LIVE CV SHEET (New Feature) ---
+const CVModal = ({ onClose }) => (
+  <div className="bg-white w-full h-full text-slate-800 overflow-y-auto relative font-sans flex flex-col md:flex-row">
+    {/* Close Button */}
+    <button onClick={onClose} className="fixed top-4 right-6 bg-black text-white w-10 h-10 rounded-full z-50 hover:bg-red-600 transition shadow-lg flex items-center justify-center">✖</button>
+    
+    {/* Left Sidebar */}
+    <div className="w-full md:w-1/3 bg-slate-50 p-8 border-r border-slate-200 text-left">
+      <div className="w-32 h-32 mx-auto md:mx-0 mb-6 rounded-full overflow-hidden border-4 border-white shadow-lg">
+        <img src="/me.jpg" alt="Profile" className="w-full h-full object-cover" />
+      </div>
+      
+      <div className="space-y-6 text-sm">
+        <div>
+          <h3 className="font-bold text-slate-900 uppercase tracking-wider mb-2 border-b-2 border-blue-500 inline-block">Contact</h3>
+          <p className="mt-2">📍 Rwanda</p>
+          <p>📧 irumvabonheur@icloud.com</p>
+          <p>🔗 ndigucci.vercel.app</p>
+          <p>🐙 github.com/ndigucci</p>
+        </div>
+
+        <div>
+          <h3 className="font-bold text-slate-900 uppercase tracking-wider mb-2 border-b-2 border-blue-500 inline-block">Tech Skills</h3>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {['Python', 'Kali Linux', 'Cybersecurity', 'Git', 'React', 'Mendeley'].map(s => (
+              <span key={s} className="bg-white border border-slate-300 px-2 py-1 rounded text-xs font-semibold">{s}</span>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3 className="font-bold text-slate-900 uppercase tracking-wider mb-2 border-b-2 border-blue-500 inline-block">Medical Skills</h3>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {['Pharmacy Practice', 'Med Safety', 'Clinical Research', 'Infection Control'].map(s => (
+              <span key={s} className="bg-white border border-slate-300 px-2 py-1 rounded text-xs font-semibold">{s}</span>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3 className="font-bold text-slate-900 uppercase tracking-wider mb-2 border-b-2 border-blue-500 inline-block">Languages</h3>
+          <ul className="space-y-1 text-slate-600 mt-2">
+            <li>🇫🇷 French (Fluent)</li>
+            <li>🇬🇧 English (Good)</li>
+            <li>🇪🇸 Spanish (Good)</li>
+            <li>🇰🇪 Swahili (Good)</li>
+            <li>🇷🇼 Kinyarwanda (Native)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    {/* Right Content */}
+    <div className="w-full md:w-2/3 p-8 md:p-12 text-left">
+      <div className="mb-8">
+        <h1 className="text-4xl font-serif font-bold text-slate-900 mb-2">Bonheur Irumva</h1>
+        <p className="text-blue-600 font-bold tracking-wide uppercase text-sm">Student Pharmacist | AI & Cybersecurity Enthusiast</p>
+      </div>
+
+      <p className="text-slate-600 italic mb-8 border-l-4 border-slate-200 pl-4">
+        Motivated Pharmacy student at INES Ruhengeri with a strong science background and a unique passion for the intersection of healthcare, AI, and technology. I bridge the gap between medical practice and digital innovation.
+      </p>
+
+      <div className="space-y-8">
+        {/* Education */}
+        <section>
+          <h2 className="text-lg font-bold text-slate-900 uppercase tracking-wider border-b border-slate-200 pb-2 mb-4">Education</h2>
+          <div className="space-y-4">
+            <div>
+              <div className="flex justify-between font-bold text-slate-800">
+                <span>Bachelor of Pharmacy (BPharm)</span>
+                <span className="text-slate-500 text-sm">Current</span>
+              </div>
+              <div className="text-blue-600 text-sm">INES Ruhengeri</div>
+            </div>
+            <div>
+              <div className="flex justify-between font-bold text-slate-800">
+                <span>A-Level (MCB)</span>
+                <span className="text-slate-500 text-sm">2023 – 2025</span>
+              </div>
+              <div className="text-blue-600 text-sm">G.S REMERA RUKOMA</div>
+            </div>
+            <div>
+              <div className="flex justify-between font-bold text-slate-800">
+                <span>O-Level Education</span>
+                <span className="text-slate-500 text-sm">2019 – 2022</span>
+              </div>
+              <div className="text-blue-600 text-sm">E.S Kanombe / EFOTEC</div>
+            </div>
+          </div>
+        </section>
+
+        {/* Experience */}
+        <section>
+          <h2 className="text-lg font-bold text-slate-900 uppercase tracking-wider border-b border-slate-200 pb-2 mb-4">Experience</h2>
+          <div>
+            <div className="flex justify-between font-bold text-slate-800">
+              <span>Anti-AIDS Club Assistant</span>
+              <span className="text-slate-500 text-sm">2024</span>
+            </div>
+            <div className="text-blue-600 text-sm mb-2">École de Dieu</div>
+            <ul className="list-disc list-inside text-sm text-slate-600 space-y-1">
+              <li>Assisted in health awareness and prevention activities regarding HIV/AIDS.</li>
+              <li>Supported teamwork and student engagement programs.</li>
+              <li>Facilitated peer communication for better health outcomes.</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* References */}
+        <section>
+          <h2 className="text-lg font-bold text-slate-900 uppercase tracking-wider border-b border-slate-200 pb-2 mb-4">References</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-slate-50 p-3 rounded">
+              <div className="font-bold text-slate-900 text-sm">RUHIGANDE Aaron</div>
+              <div className="text-xs text-slate-500 uppercase mb-1">Headmaster, G.S Remera Rukoma</div>
+              <div className="text-sm">📞 0788410325</div>
+            </div>
+            <div className="bg-slate-50 p-3 rounded">
+              <div className="font-bold text-slate-900 text-sm">TUMUKUNDE L. Monique</div>
+              <div className="text-xs text-slate-500 uppercase mb-1">Headmistress, E.S Kanombe</div>
+              <div className="text-sm">📧 eskanombe@gmail.com</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div className="mt-12 pt-6 border-t border-slate-200 flex justify-center no-print">
+        <button onClick={() => window.print()} className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition font-bold shadow-lg flex items-center gap-2">
+          <span>🖨️</span> Print / Save PDF
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
+  const [showCV, setShowCV] = useState(false); // New State for CV
 
   const scrollToSection = (id) => {
     setIsMenuOpen(false);
@@ -93,7 +230,7 @@ function App() {
     }
   };
 
-  // --- DATA SECTIONS ---
+  // --- DATA ---
   const projects = [
     {
       id: 1,
@@ -134,25 +271,24 @@ function App() {
       issuer: "Coursera&DTP / Google",
       date: "2024",
       icon: "🛡️",
-      file: "/cert1.jpg" // THIS IS YOUR IMAGE LINK
+      file: "/cert1.jpg"
     },
     {
       title: "AI for Healthcare",
       issuer: "DeepLearning.AI",
       date: "2023",
       icon: "🤖",
-      file: null // No file yet
+      file: null
     },
     {
       title: "Certified Pharmacy Assistant",
       issuer: "National pharmacy council",
       date: "2025",
       icon: "💊",
-      file: null // No file yet
+      file: null
     }
   ];
 
-  // Typewriter Effect
   const Typewriter = ({ text, delay }) => {
     const [currentText, setCurrentText] = useState('');
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -169,9 +305,11 @@ function App() {
   };
 
   return (
-    <div className={`min-h-screen bg-[#0a0a0a] text-gray-200 font-sans selection:bg-cyan-500 selection:text-black ${activeModal ? 'overflow-hidden max-h-screen' : ''}`}>
+    <div className={`min-h-screen bg-[#0a0a0a] text-gray-200 font-sans selection:bg-cyan-500 selection:text-black ${(activeModal || showCV) ? 'overflow-hidden max-h-screen' : ''}`}>
       
-      {/* MODAL & BACKGROUND */}
+      {/* --- MODALS --- */}
+      
+      {/* 1. Project Modals */}
       {activeModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
           <div className="w-full max-w-4xl h-[80vh] relative animate-in zoom-in-95 duration-200">
@@ -183,6 +321,16 @@ function App() {
           </div>
         </div>
       )}
+
+      {/* 2. Live CV Modal */}
+      {showCV && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="w-full max-w-[850px] h-full md:h-[95vh] relative animate-in zoom-in-95 duration-200 shadow-2xl">
+            <CVModal onClose={() => setShowCV(false)} />
+          </div>
+        </div>
+      )}
+
       <div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 opacity-20 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-600 rounded-full blur-[120px]"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-cyan-600 rounded-full blur-[120px]"></div>
@@ -241,11 +389,11 @@ function App() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <button onClick={() => scrollToSection('projects')} className="px-8 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-lg transition-all shadow-lg hover:shadow-cyan-500/50">View Projects</button>
               
-              {/* --- CV BUTTON --- */}
-              <a href="/cv.pdf" download="Bonheur_CV" className="px-8 py-3 border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-medium rounded-lg transition-all flex items-center justify-center gap-2">
-                <span>Download CV</span>
-                <span className="text-lg">⬇</span>
-              </a>
+              {/* --- CV BUTTON (NOW OPENS LIVE CV MODAL) --- */}
+              <button onClick={() => setShowCV(true)} className="px-8 py-3 border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-medium rounded-lg transition-all flex items-center justify-center gap-2">
+                <span>View CV</span>
+                <span className="text-lg">👁️</span>
+              </button>
 
             </div>
           </div>
@@ -259,7 +407,6 @@ function App() {
             <span className="h-px flex-1 bg-gray-800"></span><h2 className="px-4 text-3xl md:text-4xl font-bold text-white tracking-tight">Technical Skills</h2><span className="h-px flex-1 bg-gray-800"></span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Tech Card */}
             <div className="p-6 bg-[#111] border border-gray-800 rounded-xl hover:border-cyan-500/50 transition-colors duration-300 group">
               <div className="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cyan-500/20 transition"><span className="text-2xl">💻</span></div>
               <h3 className="text-xl font-bold text-white mb-4">Tech & Cyber</h3>
@@ -267,7 +414,6 @@ function App() {
                 {['Python', 'Linux (Kali)', 'AI Tools', 'Cybersecurity', 'Git'].map(skill => <span key={skill} className="text-xs font-mono px-2 py-1 bg-gray-800 text-cyan-400 rounded border border-gray-700">{skill}</span>)}
               </div>
             </div>
-            {/* Health Card */}
             <div className="p-6 bg-[#111] border border-gray-800 rounded-xl hover:border-green-500/50 transition-colors duration-300 group">
               <div className="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-500/20 transition"><span className="text-2xl">💊</span></div>
               <h3 className="text-xl font-bold text-white mb-4">Healthcare</h3>
@@ -275,7 +421,6 @@ function App() {
                 {['Pharmacy', 'Med Safety', 'Research', 'Patient Care'].map(skill => <span key={skill} className="text-xs font-mono px-2 py-1 bg-gray-800 text-green-400 rounded border border-gray-700">{skill}</span>)}
               </div>
             </div>
-            {/* Tools Card */}
             <div className="p-6 bg-[#111] border border-gray-800 rounded-xl hover:border-purple-500/50 transition-colors duration-300 group">
               <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition"><span className="text-2xl">⚡️</span></div>
               <h3 className="text-xl font-bold text-white mb-4">Productivity</h3>
@@ -311,7 +456,7 @@ function App() {
         </div>
       </section>
 
-      {/* --- CERTIFICATES SECTION (UPDATED WITH LINKS) --- */}
+      {/* --- CERTIFICATES SECTION --- */}
       <section id="certificates" className="py-24 px-4 bg-white/5">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 flex items-center">
@@ -328,7 +473,6 @@ function App() {
                   <p className="text-sm text-gray-400">{cert.issuer}</p>
                   <p className="text-xs text-cyan-500 font-mono mt-1">{cert.date}</p>
                   
-                  {/* --- NEW BUTTON HERE --- */}
                   {cert.file && (
                     <a href={cert.file} target="_blank" rel="noreferrer" className="text-xs text-cyan-500 hover:text-cyan-300 mt-2 block flex items-center gap-1 font-bold">
                       View Certificate ↗
@@ -352,17 +496,17 @@ function App() {
           <div className="bg-[#111] p-8 md:p-12 rounded-3xl border border-gray-800 shadow-2xl relative">
             <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px]"></div>
             <form action="https://api.web3forms.com/submit" method="POST" className="space-y-6 relative z-10">
-              {/* --- PASTE YOUR ACCESS KEY HERE BELOW --- */}
-              <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+              {/* --- I RESTORED YOUR KEY HERE --- */}
+              <input type="hidden" name="access_key" value="30457cd9-af59-4f98-8cf8-f970488fbd7e" />
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-mono text-cyan-500">Name</label>
-                  <input type="text" name="name" required placeholder="Enter your name ex:Natasha" className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors"/>
+                  <input type="text" name="name" required placeholder="Enter your name" className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors"/>
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-mono text-cyan-500">Email</label>
-                  <input type="email" name="email" required placeholder="Natasha@example.com" className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors"/>
+                  <input type="email" name="email" required placeholder="name@example.com" className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors"/>
                 </div>
               </div>
               <div className="space-y-2">
