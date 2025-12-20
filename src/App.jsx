@@ -519,8 +519,8 @@ function App() {
         </div>
       </section>
 
-      <<footer className="py-8 text-center text-gray-600 text-sm bg-black border-t border-gray-900">
-        <p className="font-mono mb-4">Designed & Built by NDI GUCCI</p>
+     <footer className="py-8 text-center text-gray-600 text-sm bg-black border-t border-gray-900">
+        <p className="font-mono mb-2">Designed & Built by NDI GUCCI</p>
         
         {/* Social Icons Container */}
         <div className="flex justify-center gap-6 mt-4">
@@ -551,8 +551,8 @@ function App() {
           </a>
         </div>
       </footer>
+    </div>
   );
 }
-</div>
 
 export default App;
