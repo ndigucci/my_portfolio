@@ -131,7 +131,7 @@ function App() {
   const certificates = [
     {
       title: "Google Cybersecurity Professional",
-      issuer: "Coursera / Google",
+      issuer: "Coursera&DTP / Google",
       date: "2024",
       icon: "🛡️",
       file: "/cert1.jpg" // THIS IS YOUR IMAGE LINK
@@ -145,8 +145,8 @@ function App() {
     },
     {
       title: "Certified Pharmacy Assistant",
-      issuer: "Rwanda Medical Council",
-      date: "2022",
+      issuer: "National pharmacy council",
+      date: "2025",
       icon: "💊",
       file: null // No file yet
     }
@@ -290,7 +290,7 @@ function App() {
       {/* --- PROJECTS SECTION --- */}
       <section id="projects" className="py-24 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 flex items-center"><span className="text-cyan-500 mr-3">02.</span> Selected Projects</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 flex items-center"><span className="text-cyan-500 mr-3">VISIT.</span> My Projects</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <div key={index} onClick={() => setActiveModal(project)} className="group relative bg-[#111] rounded-2xl p-6 border border-gray-800 hover:border-gray-600 transition-all duration-300 hover:-translate-y-2 cursor-pointer">
@@ -367,7 +367,7 @@ function App() {
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-mono text-cyan-500">Message</label>
-                <textarea name="message" required rows="5" placeholder="Type your message here...EX: i love you" className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors"></textarea>
+                <textarea name="message" required rows="5" placeholder="Type your message here..." className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors"></textarea>
               </div>
               <button type="submit" className="w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-lg transition-all shadow-lg transform hover:-translate-y-1">Get in Touch</button>
             </form>
@@ -381,6 +381,8 @@ function App() {
           <a href="https://github.com/ndigucci" className="hover:text-cyan-400 transition">GitHub</a>
           <a href="https://linkedin.com/in/ndigucci" className="hover:text-cyan-400 transition">LinkedIn</a>
           <a href="https://twitter.com/jyakuryama" className="hover:text-cyan-400 transition">Twitter</a>
+          <a href="mailto:bonheurirumva43@gmail.com" className="hover:text-cyan-400 transition">Email</a>
+          <a href="whatsapp:+250785008817" className="hover:text-cyan-400 transition">WhatsApp</a>
         </div>
       </footer>
     </div>
