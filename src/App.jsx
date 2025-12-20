@@ -393,11 +393,11 @@ function App() {
       file: null
     },
     {
-      title: "Certified Pharmacy Assistant",
+      title: "Certified Pharmacy Reasearcher",
       issuer: "National pharmacy council",
       date: "2025",
       icon: "💊",
-      file: null
+      file: "/cert3.jpg"
     }
   ];
 
