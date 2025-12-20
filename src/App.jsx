@@ -116,6 +116,50 @@ const ResearchModal = ({ project, onClose }) => (
   </div>
 );
 
+// --- COMPONENT: CRYPTO / SUPPORT MODAL (NEW) ---
+const CryptoModal = ({ onClose }) => {
+  const [copied, setCopied] = useState(false);
+  
+  // REPLACE THIS WITH YOUR REAL WALLET ADDRESS
+  const walletAddress = "YOUR_BINANCE_WALLET_ADDRESS_HERE"; 
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(walletAddress);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="bg-zinc-900 w-full max-w-md p-8 rounded-2xl border border-yellow-500/30 shadow-[0_0_50px_rgba(234,179,8,0.2)] text-center relative">
+       <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">✖</button>
+       
+       <div className="mb-6">
+         <div className="w-16 h-16 bg-yellow-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-yellow-500/30">
+           <span className="text-3xl">₿</span>
+         </div>
+         <h2 className="text-2xl font-bold text-white">Support & Serious Offers</h2>
+         <p className="text-gray-400 text-sm mt-2">Prioritize your request via Binance/USDT</p>
+       </div>
+
+       {/* QR Code Area */}
+       <div className="bg-white p-2 rounded-xl w-48 h-48 mx-auto mb-6">
+          <img src="/binance.jpg" alt="Binance QR" className="w-full h-full object-contain" />
+       </div>
+
+       {/* Address Area */}
+       <div className="bg-black/50 border border-gray-700 rounded-lg p-3 mb-4 flex items-center justify-between">
+         <div className="text-xs text-gray-400 font-mono truncate mr-2">{walletAddress}</div>
+         <button onClick={handleCopy} className={`text-xs font-bold px-3 py-1 rounded transition ${copied ? 'bg-green-500 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}>
+            {copied ? 'COPIED!' : 'COPY'}
+         </button>
+       </div>
+
+       <p className="text-xs text-gray-500">Network: Ensure you select the correct network (TRC20/BEP20).</p>
+    </div>
+  );
+};
+
+
 // --- COMPONENT: LIVE CV SHEET ---
 const CVModal = ({ onClose }) => (
   <div className="bg-white w-full h-full text-slate-800 overflow-y-auto relative font-sans flex flex-col md:flex-row">
@@ -250,11 +294,10 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
   const [showCV, setShowCV] = useState(false);
+  const [showCrypto, setShowCrypto] = useState(false); // NEW STATE FOR CRYPTO
   
-  // --- NEW STATE: GO TO TOP BUTTON ---
   const [showScrollBtn, setShowScrollBtn] = useState(false);
 
-  // --- EFFECT: SHOW BUTTON ON SCROLL ---
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 300) {
@@ -279,7 +322,6 @@ function App() {
     }
   };
 
-  // --- DATA ---
   const projects = [
     {
       id: 1,
@@ -354,7 +396,7 @@ function App() {
   };
 
   return (
-    <div className={`min-h-screen bg-[#0a0a0a] text-gray-200 font-sans selection:bg-cyan-500 selection:text-black ${(activeModal || showCV) ? 'overflow-hidden max-h-screen' : ''}`}>
+    <div className={`min-h-screen bg-[#0a0a0a] text-gray-200 font-sans selection:bg-cyan-500 selection:text-black ${(activeModal || showCV || showCrypto) ? 'overflow-hidden max-h-screen' : ''}`}>
       
       {/* --- GO TO TOP BUTTON --- */}
       {showScrollBtn && (
@@ -363,7 +405,7 @@ function App() {
           className="fixed bottom-8 right-8 bg-cyan-600 text-white p-3 rounded-full shadow-lg hover:bg-cyan-500 transition-all z-50 animate-bounce"
           aria-label="Scroll to top"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
         </button>
       )}
 
@@ -385,6 +427,12 @@ function App() {
           <div className="w-full max-w-[850px] h-full md:h-[95vh] relative animate-in zoom-in-95 duration-200 shadow-2xl">
             <CVModal onClose={() => setShowCV(false)} />
           </div>
+        </div>
+      )}
+
+      {showCrypto && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-200">
+          <CryptoModal onClose={() => setShowCrypto(false)} />
         </div>
       )}
 
@@ -445,6 +493,8 @@ function App() {
               <span className="animate-pulse ml-1">_</span>
             </div>
             <p className="text-gray-400 text-lg mb-10 leading-relaxed max-w-2xl mx-auto md:mx-0">I bridge the gap between <span className="text-white font-semibold">Healthcare</span> and <span className="text-white font-semibold">Technology</span>, building digital solutions that enhance safety and efficiency in Africa and beyond.</p>
+            
+            {/* BUTTON GROUP */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <button onClick={() => scrollToSection('projects')} className="px-8 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-lg transition-all shadow-lg hover:shadow-cyan-500/50">View Projects</button>
               
@@ -452,7 +502,14 @@ function App() {
                 <span>View CV</span>
                 <span className="text-lg">👁️</span>
               </button>
+
+              {/* NEW SPONSOR BUTTON */}
+              <button onClick={() => setShowCrypto(true)} className="px-8 py-3 border border-yellow-500/30 bg-yellow-500/10 text-yellow-500 hover:bg-yellow-500 hover:text-black font-medium rounded-lg transition-all flex items-center justify-center gap-2">
+                 <span>Sponsor</span>
+                 <span>⚡</span>
+              </button>
             </div>
+
           </div>
         </div>
       </section>
@@ -593,32 +650,27 @@ function App() {
           
           {/* GitHub Icon */}
           <a href="https://github.com/ndigucci" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-cyan-400 transition-transform hover:-translate-y-1">
-            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
           </a>
 
           {/* LinkedIn Icon */}
           <a href="https://linkedin.com/in/ndigucci" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-cyan-400 transition-transform hover:-translate-y-1">
-            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
           </a>
 
           {/* Twitter (X) Icon */}
           <a href="https://twitter.com/jyakuryama" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-cyan-400 transition-transform hover:-translate-y-1">
-             <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+             <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
           </a>
 
           {/* Email Icon */}
           <a href="mailto:bonheurirumva43@gmail.com" className="text-gray-400 hover:text-cyan-400 transition-transform hover:-translate-y-1">
-            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-11.174l4.623 5.462zm12.008 9.071h-13.326l3.855-4.813 2.908 3.439 2.908-3.439 3.655 4.813zm-5.433-6.187l1.235-1.46 5.567 6.576v-11.026l-6.802 5.91zm.902-1.072l-2.091 2.472-2.108-2.472-5.902-5.228h15.986l-5.885 5.228z"/></svg>
+            <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-11.174l4.623 5.462zm12.008 9.071h-13.326l3.855-4.813 2.908 3.439 2.908-3.439 3.655 4.813zm-5.433-6.187l1.235-1.46 5.567 6.576v-11.026l-6.802 5.91zm.902-1.072l-2.091 2.472-2.108-2.472-5.902-5.228h15.986l-5.885 5.228z"/></svg>
           </a>
 
           {/* WhatsApp Icon */}
           <a href="https://wa.me/250785008817" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-cyan-400 transition-transform hover:-translate-y-1">
-            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-          </a>
-
-          {/*Binance Icon */}
-          <a href="https://www.binance.com/en/users/marocainez" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-cyan-400 transition-transform hover:-translate-y-1">
-            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0l3.464 6-3.464 2-3.464-2 3.464-6zm0 4.472l-1.732 3 1.732 1 1.732-1-1.732-3zm6.928 1.732l-3.464 2 1.732 3 3.464-2-1.732-3zm-13.856 0l-1.732 3 3.464 2 1.732-3-3.464-2zm6.928 2.732l-3.464 2 3.464 2 3.464-2-3.464-2zm0 4l-1.732 1 1.732 3 1.732-3-1.732-1zm6.928 1l-3.464 2 1.732 3 3.464-2-1.732-3zm-13.856 0l-1.732 3 3.464 2 1.732-3-3.464-2zm6.928 2.732l-3.464 2 3.464 2 3.464-2-3.464-2z"/></svg>
+            <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
           </a>
         </div>
       </footer>
