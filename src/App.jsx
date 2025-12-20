@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-// --- NEW COMPONENT: SCROLL ANIMATION WRAPPER ---
-// This handles the "fade in and slide up" effect
+// --- COMPONENT: SCROLL ANIMATION WRAPPER ---
 const RevealOnScroll = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
@@ -36,7 +35,7 @@ const RevealOnScroll = ({ children }) => {
   );
 };
 
-// --- COMPONENT: TERMINAL (For Cybersecurity Project) ---
+// --- COMPONENT: TERMINAL ---
 const Terminal = ({ onClose }) => {
   const [history, setHistory] = useState([
     { type: 'output', content: 'Initializing Kali Linux environment...' },
@@ -120,10 +119,8 @@ const ResearchModal = ({ project, onClose }) => (
 // --- COMPONENT: LIVE CV SHEET ---
 const CVModal = ({ onClose }) => (
   <div className="bg-white w-full h-full text-slate-800 overflow-y-auto relative font-sans flex flex-col md:flex-row">
-    {/* Close Button */}
     <button onClick={onClose} className="fixed top-4 right-6 bg-black text-white w-10 h-10 rounded-full z-50 hover:bg-red-600 transition shadow-lg flex items-center justify-center">✖</button>
     
-    {/* Left Sidebar */}
     <div className="w-full md:w-1/3 bg-slate-50 p-8 border-r border-slate-200 text-left">
       <div className="w-32 h-32 mx-auto md:mx-0 mb-6 rounded-full overflow-hidden border-4 border-white shadow-lg">
         <img src="/me.jpg" alt="Profile" className="w-full h-full object-cover" />
@@ -169,7 +166,6 @@ const CVModal = ({ onClose }) => (
       </div>
     </div>
 
-    {/* Right Content */}
     <div className="w-full md:w-2/3 p-8 md:p-12 text-left">
       <div className="mb-8">
         <h1 className="text-4xl font-serif font-bold text-slate-900 mb-2">Bonheur Irumva</h1>
@@ -181,7 +177,6 @@ const CVModal = ({ onClose }) => (
       </p>
 
       <div className="space-y-8">
-        {/* Education */}
         <section>
           <h2 className="text-lg font-bold text-slate-900 uppercase tracking-wider border-b border-slate-200 pb-2 mb-4">Education</h2>
           <div className="space-y-4">
@@ -209,7 +204,6 @@ const CVModal = ({ onClose }) => (
           </div>
         </section>
 
-        {/* Experience */}
         <section>
           <h2 className="text-lg font-bold text-slate-900 uppercase tracking-wider border-b border-slate-200 pb-2 mb-4">Experience</h2>
           <div>
@@ -226,7 +220,6 @@ const CVModal = ({ onClose }) => (
           </div>
         </section>
 
-        {/* References */}
         <section>
           <h2 className="text-lg font-bold text-slate-900 uppercase tracking-wider border-b border-slate-200 pb-2 mb-4">References</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -257,6 +250,26 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
   const [showCV, setShowCV] = useState(false);
+  
+  // --- NEW STATE: GO TO TOP BUTTON ---
+  const [showScrollBtn, setShowScrollBtn] = useState(false);
+
+  // --- EFFECT: SHOW BUTTON ON SCROLL ---
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollBtn(true);
+      } else {
+        setShowScrollBtn(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const scrollToSection = (id) => {
     setIsMenuOpen(false);
@@ -343,6 +356,17 @@ function App() {
   return (
     <div className={`min-h-screen bg-[#0a0a0a] text-gray-200 font-sans selection:bg-cyan-500 selection:text-black ${(activeModal || showCV) ? 'overflow-hidden max-h-screen' : ''}`}>
       
+      {/* --- GO TO TOP BUTTON --- */}
+      {showScrollBtn && (
+        <button 
+          onClick={scrollToTop} 
+          className="fixed bottom-8 right-8 bg-cyan-600 text-white p-3 rounded-full shadow-lg hover:bg-cyan-500 transition-all z-50 animate-bounce"
+          aria-label="Scroll to top"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
+        </button>
+      )}
+
       {/* --- MODALS --- */}
       {activeModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
