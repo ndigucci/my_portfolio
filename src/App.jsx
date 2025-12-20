@@ -116,11 +116,30 @@ const ResearchModal = ({ project, onClose }) => (
   </div>
 );
 
-// --- COMPONENT: CRYPTO / SUPPORT MODAL (NEW) ---
+// --- COMPONENT: BLOG MODAL (NEW) ---
+const BlogModal = ({ blog, onClose }) => (
+  <div className="bg-zinc-900 w-full h-full p-8 rounded-lg border border-gray-700 overflow-y-auto relative text-left">
+    <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">✖</button>
+    <div className="max-w-3xl mx-auto">
+      <div className="mb-8 border-b border-gray-800 pb-8">
+        <div className="text-cyan-500 font-mono text-xs mb-2">{blog.date} | {blog.category}</div>
+        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">{blog.title}</h2>
+        <div className="flex gap-2">
+           {blog.tags.map(tag => <span key={tag} className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded">#{tag}</span>)}
+        </div>
+      </div>
+      <div className="text-gray-300 leading-7 space-y-4 whitespace-pre-line">
+        {blog.content}
+      </div>
+    </div>
+  </div>
+);
+
+// --- COMPONENT: CRYPTO / SUPPORT MODAL ---
 const CryptoModal = ({ onClose }) => {
   const [copied, setCopied] = useState(false);
   
-  // REPLACE THIS WITH YOUR REAL WALLET ADDRESS
+  // YOUR WALLET ADDRESS (PRESERVED)
   const walletAddress = "TTfGqg9vGLAbNXjdxsyL7xMnUjYN7jBtfU"; 
 
   const handleCopy = () => {
@@ -160,7 +179,6 @@ const CryptoModal = ({ onClose }) => {
     </div>
   );
 };
-
 
 // --- COMPONENT: LIVE CV SHEET ---
 const CVModal = ({ onClose }) => (
@@ -296,8 +314,8 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
   const [showCV, setShowCV] = useState(false);
-  const [showCrypto, setShowCrypto] = useState(false); // NEW STATE FOR CRYPTO
-  
+  const [showCrypto, setShowCrypto] = useState(false);
+  const [activeBlog, setActiveBlog] = useState(null); // NEW BLOG STATE
   const [showScrollBtn, setShowScrollBtn] = useState(false);
 
   useEffect(() => {
@@ -324,6 +342,7 @@ function App() {
     }
   };
 
+  // --- DATA ---
   const projects = [
     {
       id: 1,
@@ -382,6 +401,34 @@ function App() {
     }
   ];
 
+  // --- BLOG DATA ---
+  const blogs = [
+    {
+      id: 1,
+      title: "The Future of AI in African Healthcare",
+      date: "Dec 18, 2025",
+      category: "HealthTech",
+      excerpt: "How Artificial Intelligence is bridging the gap in diagnostics and pharmacy supply chains across the continent.",
+      content: `Artificial Intelligence is not just a buzzword; it's a lifeline for modernizing healthcare in Africa.
+      
+      In this article, I explore how machine learning models can predict malaria outbreaks and optimize drug supply chains to prevent stock-outs in rural pharmacies. 
+      
+      We are seeing a shift from reactive to proactive healthcare, driven by data. As a pharmacy student and tech enthusiast, I believe the integration of tools like Python-based analysis into our medical curriculum is essential.`,
+      tags: ["AI", "Africa", "Innovation"]
+    },
+    {
+      id: 2,
+      title: "Securing Patient Data: A Pharmacist's Perspective",
+      date: "Nov 10, 2025",
+      category: "Cybersecurity",
+      excerpt: "Why cybersecurity fundamentals are becoming mandatory for modern health professionals.",
+      content: `With the rise of Electronic Health Records (EHRs), the attack surface for hospitals has widened. 
+      
+      It is no longer enough to just know pharmacology; we must understand data privacy. This post discusses the basics of securing patient data, the importance of strong passwords in hospital systems, and why every health professional should know the basics of social engineering defenses.`,
+      tags: ["Security", "Privacy", "HealthData"]
+    }
+  ];
+
   const Typewriter = ({ text, delay }) => {
     const [currentText, setCurrentText] = useState('');
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -398,7 +445,7 @@ function App() {
   };
 
   return (
-    <div className={`min-h-screen bg-[#0a0a0a] text-gray-200 font-sans selection:bg-cyan-500 selection:text-black ${(activeModal || showCV || showCrypto) ? 'overflow-hidden max-h-screen' : ''}`}>
+    <div className={`min-h-screen bg-[#0a0a0a] text-gray-200 font-sans selection:bg-cyan-500 selection:text-black ${(activeModal || showCV || showCrypto || activeBlog) ? 'overflow-hidden max-h-screen' : ''}`}>
       
       {/* --- GO TO TOP BUTTON --- */}
       {showScrollBtn && (
@@ -420,6 +467,15 @@ function App() {
             ) : (
               <ResearchModal project={activeModal} onClose={() => setActiveModal(null)} />
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Blog Modal */}
+      {activeBlog && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="w-full max-w-3xl h-[80vh] relative animate-in zoom-in-95 duration-200">
+             <BlogModal blog={activeBlog} onClose={() => setActiveBlog(null)} />
           </div>
         </div>
       )}
@@ -451,12 +507,21 @@ function App() {
               NDI <span className="text-cyan-500">GUCCI</span>
             </div>
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8">
-                {['Home', 'About', 'Skills', 'Projects', 'Certificates', 'Contact'].map((item) => (
+              <div className="ml-10 flex items-center space-x-8">
+                {['Home', 'About', 'Skills', 'Projects', 'Certificates', 'Blog'].map((item) => (
                   <button key={item} onClick={() => scrollToSection(item.toLowerCase())} className="text-sm font-medium hover:text-cyan-400 transition-colors duration-300">
                      <span className="text-cyan-500 opacity-50 mr-1">&lt;</span>{item}<span className="text-cyan-500 opacity-50 ml-1">/&gt;</span>
                   </button>
                 ))}
+                
+                {/* --- HIRE ME BUTTON --- */}
+                <button 
+                  onClick={() => scrollToSection('contact')} 
+                  className="px-5 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-xs font-bold rounded-full hover:shadow-[0_0_15px_rgba(8,145,178,0.5)] transition-all transform hover:-translate-y-0.5"
+                >
+                  HIRE ME
+                </button>
+
               </div>
             </div>
             <div className="md:hidden">
@@ -467,7 +532,7 @@ function App() {
         {isMenuOpen && (
           <div className="md:hidden bg-[#0a0a0a] border-b border-white/10">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {['Home', 'About', 'Skills', 'Projects', 'Certificates', 'Contact'].map((item) => (
+              {['Home', 'About', 'Skills', 'Projects', 'Certificates', 'Blog', 'Contact'].map((item) => (
                 <button key={item} onClick={() => scrollToSection(item.toLowerCase())} className="block w-full text-left px-3 py-3 rounded-md text-base font-medium hover:bg-white/5 hover:text-cyan-400 transition">{item}</button>
               ))}
             </div>
@@ -496,7 +561,6 @@ function App() {
             </div>
             <p className="text-gray-400 text-lg mb-10 leading-relaxed max-w-2xl mx-auto md:mx-0">I bridge the gap between <span className="text-white font-semibold">Healthcare</span> and <span className="text-white font-semibold">Technology</span>, building digital solutions that enhance safety and efficiency in Africa and beyond.</p>
             
-            {/* BUTTON GROUP */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <button onClick={() => scrollToSection('projects')} className="px-8 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-lg transition-all shadow-lg hover:shadow-cyan-500/50">View Projects</button>
               
@@ -505,7 +569,6 @@ function App() {
                 <span className="text-lg">👁️</span>
               </button>
 
-              {/* NEW SPONSOR BUTTON */}
               <button onClick={() => setShowCrypto(true)} className="px-8 py-3 border border-yellow-500/30 bg-yellow-500/10 text-yellow-500 hover:bg-yellow-500 hover:text-black font-medium rounded-lg transition-all flex items-center justify-center gap-2">
                  <span>Sponsor</span>
                  <span>⚡</span>
@@ -601,6 +664,32 @@ function App() {
                     )}
 
                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </RevealOnScroll>
+
+      {/* --- NEW BLOG SECTION --- */}
+      <RevealOnScroll>
+        <section id="blog" className="py-24 px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 flex items-center">
+              <span className="text-cyan-500 mr-3">04.</span> Latest Articles
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {blogs.map((blog) => (
+                <div key={blog.id} className="bg-[#111] border border-gray-800 p-8 rounded-2xl hover:border-gray-600 transition-colors group cursor-pointer" onClick={() => setActiveBlog(blog)}>
+                  <div className="flex justify-between items-start mb-4">
+                    <span className="text-cyan-500 font-mono text-xs px-2 py-1 bg-cyan-500/10 rounded">{blog.category}</span>
+                    <span className="text-gray-500 text-xs">{blog.date}</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">{blog.title}</h3>
+                  <p className="text-gray-400 text-sm mb-6 line-clamp-2">{blog.excerpt}</p>
+                  <button className="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Read Article <span className="text-cyan-500">→</span>
+                  </button>
                 </div>
               ))}
             </div>
