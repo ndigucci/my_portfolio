@@ -367,7 +367,7 @@ function App() {
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-mono text-cyan-500">Message</label>
-                <textarea name="message" required rows="5" placeholder="Type your message here..." className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors"></textarea>
+                <textarea name="message" required rows="5" placeholder="Type your message here...EX: i love you" className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors"></textarea>
               </div>
               <button type="submit" className="w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-lg transition-all shadow-lg transform hover:-translate-y-1">Get in Touch</button>
             </form>
