@@ -686,7 +686,7 @@ function App() {
                           <p className="text-xs text-cyan-500 font-mono">{cert.date}</p>
                           {cert.link && (
                             <a href={cert.link} target="_blank" rel="noreferrer" className="text-xs font-bold text-gray-300 hover:text-white flex items-center gap-1">
-                              View Full ↗
+                              View Full. ↗
                             </a>
                           )}
                         </div>
