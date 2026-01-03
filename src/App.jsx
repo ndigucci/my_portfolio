@@ -712,7 +712,7 @@ function App() {
                     <div key={index} className="min-w-[280px] w-[280px] h-[380px] flex-shrink-0 group relative bg-[#111] border border-gray-800 rounded-xl overflow-hidden hover:border-cyan-500/30 transition-all hover:-translate-y-1 flex flex-col">
                       
                       {/* 1. IMAGE AREA: Increased height from 160px to 230px */}
-                      <div className="h-[230px] w-full bg-gray-900 overflow-hidden relative border-b border-gray-800">
+                      <div className="h-[250px] w-full bg-gray-900 overflow-hidden relative border-b border-gray-800">
                         {cert.image ? (
                           <img src={cert.image} alt={cert.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
                         ) : (
@@ -724,7 +724,7 @@ function App() {
                       </div>
 
                       {/* 2. TEXT AREA: Reduced padding (p-4) to fit content in smaller space */}
-                      <div className="p-4 flex flex-col flex-grow">
+                      <div className="p-3 flex flex-col flex-grow">
                         
                         {/* Title: Still limited to 2 lines */}
                         <h3 className="font-bold text-white text-md mb-1 line-clamp-2 leading-tight">
