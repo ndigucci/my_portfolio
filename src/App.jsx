@@ -685,7 +685,15 @@ function App() {
 
       {/* --- NEW: CATEGORIZED CERTIFICATES SECTION --- */}
       <RevealOnScroll>
+        {/* --- CERTIFICATES SECTION (FIXED SIZES & HIDDEN SCROLLBAR) --- */}
+      <RevealOnScroll>
         <section id="certificates" className="py-24 px-4 bg-white/5">
+          {/* Internal Style to Force Hide Scrollbar */}
+          <style>{`
+            .no-scrollbar::-webkit-scrollbar { display: none; }
+            .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+          `}</style>
+
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 flex items-center">
               <span className="text-cyan-500 mr-3">03.</span> Certificates & Awards
@@ -696,28 +704,36 @@ function App() {
               <div key={catIndex} className="mb-12">
                 <h3 className="text-2xl font-bold text-gray-300 mb-6 border-l-4 border-cyan-500 pl-4">{category.title}</h3>
                 
-                <div className="flex overflow-x-auto gap-4 pb-4 no scrollbar">
+                {/* Horizontal Scroll Container */}
+                <div className="flex overflow-x-auto gap-6 pb-6 no-scrollbar">
                   {category.items.map((cert, index) => (
-                   <div key={index} className="min-w-[250px] md:min-w-[260px] group relative bg-[#111] border border-gray-800 rounded-xl overflow-hidden hover:border-cyan-500/30 transition-all hover:-translate-y-1">
+                    
+                    /* THE CARD: Fixed Width (280px) and Fixed Height (380px) */
+                    <div key={index} className="min-w-[280px] w-[280px] h-[380px] flex-shrink-0 group relative bg-[#111] border border-gray-800 rounded-xl overflow-hidden hover:border-cyan-500/30 transition-all hover:-translate-y-1 flex flex-col">
                       
-                      {/* Thumbnail Preview Area */}
-                      <div className="h-40 w-full bg-gray-900 overflow-hidden relative">
-                        {/* If image exists, show it. If not, show pattern */}
+                      {/* Thumbnail Area: Fixed Height (160px) & Object Cover (Crops to fit) */}
+                      <div className="h-[160px] w-full bg-gray-900 overflow-hidden relative border-b border-gray-800">
                         {cert.image ? (
-                          <img src={cert.image} alt={cert.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
+                          <img src={cert.image} alt={cert.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center bg-gray-800 text-gray-600 text-4xl">📜</div>
                         )}
-                        {/* Overlay on Hover */}
                         <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                            <span className="text-white font-bold bg-cyan-600 px-4 py-2 rounded-full text-xs">Preview</span>
                         </div>
                       </div>
 
-                      <div className="p-5">
-                        <h3 className="font-bold text-white text-lg mb-1">{cert.title}</h3>
-                        <p className="text-sm text-gray-400">{cert.issuer}</p>
-                        <div className="flex justify-between items-center mt-4">
+                      {/* Content Area */}
+                      <div className="p-5 flex flex-col flex-grow">
+                        {/* Title: Restricted to 2 lines so it doesn't push content down */}
+                        <h3 className="font-bold text-white text-lg mb-2 line-clamp-2 h-[56px] overflow-hidden leading-tight">
+                          {cert.title}
+                        </h3>
+                        
+                        <p className="text-sm text-gray-400 mb-4">{cert.issuer}</p>
+                        
+                        {/* Footer (Date & Link) - Pushed to bottom */}
+                        <div className="mt-auto flex justify-between items-center pt-4 border-t border-gray-800">
                           <p className="text-xs text-cyan-500 font-mono">{cert.date}</p>
                           {cert.link && (
                             <a href={cert.link} target="_blank" rel="noreferrer" className="text-xs font-bold text-gray-300 hover:text-white flex items-center gap-1">
@@ -734,6 +750,7 @@ function App() {
 
           </div>
         </section>
+      </RevealOnScroll>
       </RevealOnScroll>
 
       {/* --- BLOG SECTION --- */}
