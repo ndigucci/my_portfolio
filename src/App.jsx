@@ -746,7 +746,6 @@ function App() {
                       </div>
                     </div>
                   ))}
-                  ))}
                       {/* Content Area */}
                       <div className="p-5 flex flex-col flex-grow">
                         {/* Title: Restricted to 2 lines so it doesn't push content down */}
