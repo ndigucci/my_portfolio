@@ -6,3 +6,11 @@ html, body {
   background-color: #000; /* Force black background */
   color: white;
 }
+/* Hides the scrollbar but keeps scrolling functionality */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
