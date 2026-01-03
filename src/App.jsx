@@ -402,6 +402,13 @@ function App() {
           date: "2025",
           image: "/addv.jpg",
           link: "/addv.jpg"
+        },
+        {
+          title: "CYBERSECURITY FUNDAMENTALS",
+          issuer: "IBM/Coursera",
+          date: "2025",
+          image:"/cyber.jpg",
+          link:"/cyber.jpg"
         }
       ]
     },
@@ -409,8 +416,8 @@ function App() {
       title: "💊 Healthcare & Pharmacy",
       items: [
         {
-          title: "AI for Healthcare",
-          issuer: "WHO Organization",
+          title: "RESEARCH COMMUNICATION",
+          issuer: "WHO Organization/TDR",
           date: "2025",
           image: "/image.jpg", 
           link: "/image.jpg"
