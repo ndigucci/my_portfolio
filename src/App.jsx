@@ -376,6 +376,20 @@ function App() {
           date: "2025",
           image:"/pthon.jpg",
           link:"/pthon.jpg"
+        },
+        {
+          title: "INFORMATION COMMUNICATION TECHNOLOGY (ICT)",
+          issuer: "ICDL/ICDL AFRICA",
+          date: "2025",
+          image:"/icdlo.jpg",
+          link:"/icdlo.jpg"
+        },
+        {
+          title: "PROOF FOR ICDL COURSES",
+          issuer: "ICDL/ICDL AFRICA",
+          date: "2025", 
+          image:"/icdll.jpg",
+          link:"/icdll.jpg"
         }
       ]
     },
