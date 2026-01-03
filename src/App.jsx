@@ -682,7 +682,7 @@ function App() {
               <div key={catIndex} className="mb-12">
                 <h3 className="text-2xl font-bold text-gray-300 mb-6 border-l-4 border-cyan-500 pl-4">{category.title}</h3>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   {category.items.map((cert, index) => (
                     <div key={index} className="group relative bg-[#111] border border-gray-800 rounded-xl overflow-hidden hover:border-cyan-500/30 transition-all hover:-translate-y-1">
                       
