@@ -413,7 +413,7 @@ function App() {
       ]
     },
     {
-      title: "💊 Healthcare & Pharmacy",
+      title: "💊 Healthcare,Pharmacy & Research",
       items: [
         {
           title: "RESEARCH COMMUNICATION",
@@ -428,6 +428,13 @@ function App() {
           date: "2025",
           image: "/pharm.jpg",
           link: "/pharm.jpg"
+        },
+        {
+          title: "Problem solving in both Health and Technology",
+          issuer: "DTP program/cornerstone/MINICT",
+          date: "2025",
+          image: "/prob.jpg",
+          link: "/prob.jpg" 
         }
       ]
     }
