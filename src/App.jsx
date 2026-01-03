@@ -706,13 +706,30 @@ function App() {
                 
                 {/* Horizontal Scroll Container */}
                 <div className="flex overflow-x-auto gap-6 pb-6 no-scrollbar">
-                 {category.items.map((cert, index) => (
+                 {certificateCategories.map((category, catIndex) => (
+              <div key={catIndex} className="mb-12">
+                
+                {/* CATEGORY TITLE + SCROLL ARROW */}
+                <div className="flex items-center justify-between mb-6">
+                   <h3 className="text-2xl font-bold text-gray-300 border-l-4 border-cyan-500 pl-4">
+                     {category.title}
+                   </h3>
+                   <div className="flex items-center gap-2 text-cyan-500 text-sm font-mono animate-pulse">
+                     <span className="hidden md:inline">Scroll</span>
+                     <span className="md:hidden">Swipe</span>
+                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                   </div>
+                </div>
+                
+                {/* Horizontal Scroll Container */}
+                <div className="flex overflow-x-auto gap-4 pb-6 no-scrollbar">
+                  {category.items.map((cert, index) => (
                     
-                    /* THE CARD: REDUCED HEIGHT from 380px to 320px */
+                    /* THE COMPACT CARD (320px Height) */
                     <div key={index} className="min-w-[280px] w-[280px] h-[320px] flex-shrink-0 group relative bg-[#111] border border-gray-800 rounded-xl overflow-hidden hover:border-cyan-500/30 transition-all hover:-translate-y-1 flex flex-col">
                       
-                      {/* IMAGE AREA: Balanced height at 180px */}
-                      <div className="h-[200px] w-full bg-gray-900 overflow-hidden relative border-b border-gray-800">
+                      {/* IMAGE AREA (180px) */}
+                      <div className="h-[180px] w-full bg-gray-900 overflow-hidden relative border-b border-gray-800">
                         {cert.image ? (
                           <img src={cert.image} alt={cert.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
                         ) : (
@@ -723,18 +740,15 @@ function App() {
                         </div>
                       </div>
 
-                      {/* TEXT AREA: Reduced padding to p-3 for a tighter fit */}
+                      {/* TEXT AREA (Compact) */}
                       <div className="p-3 flex flex-col flex-grow justify-between">
                         <div>
-                            {/* Title */}
                             <h3 className="font-bold text-white text-sm mb-1 line-clamp-2 leading-tight">
                               {cert.title}
                             </h3>
-                            {/* Issuer */}
                             <p className="text-xs text-gray-400">{cert.issuer}</p>
                         </div>
                         
-                        {/* Footer */}
                         <div className="flex justify-between items-center pt-2 border-t border-gray-800 mt-2">
                           <p className="text-[10px] text-cyan-500 font-mono">{cert.date}</p>
                           {cert.link && (
@@ -746,6 +760,9 @@ function App() {
                       </div>
                     </div>
                   ))}
+                </div>
+              </div>
+            ))}
                       {/* Content Area */}
                       <div className="p-5 flex flex-col flex-grow">
                         {/* Title: Restricted to 2 lines so it doesn't push content down */}
