@@ -386,8 +386,8 @@ function App() {
           title: "DTP BIGNNER AI&ML COMPLETION",
           issuer: "DTP program/ conerstone",
           date: "2024",
-          image: "/cert1.jpg", 
-          link: "/cert1.jpg"
+          image: "/bignner.jpg", 
+          link: "/biggner.jpg"
         },
         {
           title: "DTP INTERMEDIATE AI&ML COMPLETION",
@@ -400,8 +400,8 @@ function App() {
           title: "DTP ADVANCED AI&ML COMPLETION",
           issuer: "DTP program/ cornerstone",
           date: "2025",
-          image: "/cert3.jpg",
-          link: "/cert3.jpg"
+          image: "/addv.jpg",
+          link: "/addv.jpg"
         }
       ]
     },
@@ -419,8 +419,8 @@ function App() {
           title: "Certified Pharmacy Researcher",
           issuer: "National Pharmacy Council",
           date: "2025",
-          image: "/cert3.jpg",
-          link: "/cert3.jpg"
+          image: "/pharm.jpg",
+          link: "/pharm.jpg"
         }
       ]
     }
