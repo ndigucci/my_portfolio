@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-// --- MEDICAL DATABASE (Moved inside Terminal for cleaner access) ---
+// --- MEDICAL DATABASE ---
 const MED_DB = {
   paracetamol: { use: "Pain relief, Fever", warning: "Liver toxicity if overdosed", side_effects: "Nausea, Rash", adult_dose: "500mg-1g every 4-6h (Max 4g/day)" },
   ibuprofen: { use: "Inflammation, Pain", warning: "Stomach ulcers, Asthma triggers", side_effects: "Stomach pain, Heartburn", adult_dose: "200mg-400mg every 4-6h" },
@@ -35,7 +35,7 @@ const TypewriterLine = ({ text, onComplete }) => {
         clearInterval(intervalId);
         onComplete && onComplete();
       }
-    }, 25); // Typing speed (smaller = faster)
+    }, 20); // Speed: 20ms per character
     return () => clearInterval(intervalId);
   }, [text, onComplete]);
 
@@ -60,9 +60,9 @@ const Terminal = ({ onClose }) => {
   // Initial Boot Sequence
   useEffect(() => {
     if (history.length === 1) {
-      setTimeout(() => addLine('system', 'Loading Medical Modules... [OK]', true), 1000);
-      setTimeout(() => addLine('warning', '⚠ DISCLAIMER: General info ONLY. Not a doctor replacement.', true), 2000);
-      setTimeout(() => addLine('output', 'Welcome root@health. Type "help" for commands.', true), 3500);
+      setTimeout(() => addLine('system', 'Loading Medical Modules... [OK]', true), 800);
+      setTimeout(() => addLine('warning', '⚠ DISCLAIMER: General info ONLY. Not a doctor replacement.', true), 1800);
+      setTimeout(() => addLine('output', 'Welcome root@health. Type "help" for commands.', true), 3000);
     }
   }, [history]);
 
@@ -91,15 +91,15 @@ const Terminal = ({ onClose }) => {
       setHistory(prev => [...prev, { type: 'input', content: cmdRaw, needsTyping: false }]);
       setInput('');
       
-      // Process logic
+      // Process logic with a slight "thinking" delay
       setTimeout(() => {
          if (flow.mode === 'default') processDefaultCommand(cmdRaw.toLowerCase());
          else processFlowInput(cmdRaw);
-      }, 100);
+      }, 300);
     }
   };
 
-  // --- LOGIC PROCESSORS (Same logic, new output method) ---
+  // --- LOGIC PROCESSORS ---
   const processDefaultCommand = (cmd) => {
     const args = cmd.split(' ');
     const command = args[0];
@@ -133,9 +133,19 @@ const Terminal = ({ onClose }) => {
         addLine('query', '1. What is the medicine name?');
         break;
       
+      case 'interaction_check':
+        setFlow({ mode: 'interaction', step: 1, data: {} });
+        addLine('query', 'Enter medicines (comma separated):');
+        break;
+
       case 'first_aid':
         if (FIRST_AID_DB[param]) addLine('output', `FIRST AID (${param.toUpperCase()}): ${FIRST_AID_DB[param]}`);
         else addLine('error', 'Unknown. Try: burn, bleeding, fracture, choking');
+        break;
+      
+      case 'prevention':
+        if (PREVENTION_DB[param]) addLine('output', `PREVENTION (${param.toUpperCase()}): ${PREVENTION_DB[param]}`);
+        else addLine('error', 'Unknown. Try: malaria, flu, covid');
         break;
 
       default: addLine('error', `Command not found: ${command}. Type "help".`);
@@ -181,6 +191,21 @@ const Terminal = ({ onClose }) => {
          else addLine('warning', 'Medicine not found in local DB.');
          setFlow({ mode: 'default', step: 0, data: {} });
        }
+    }
+
+    else if (flow.mode === 'interaction') {
+        const meds = input.toLowerCase();
+        addLine('system', 'CHECKING INTERACTIONS...');
+        setTimeout(() => {
+            if (meds.includes('aspirin') && meds.includes('warfarin')) {
+                addLine('error', '⚠ ALERT: Major interaction (Bleeding risk).');
+            } else if (meds.includes('ibuprofen') && meds.includes('aspirin')) {
+                addLine('warning', '⚠ CAUTION: Stomach ulcer risk.');
+            } else {
+                addLine('output', 'No severe interactions found in simple DB. Consult Pharmacist.');
+            }
+            setFlow({ mode: 'default', step: 0, data: {} });
+        }, 800);
     }
   };
 
