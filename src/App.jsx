@@ -709,7 +709,7 @@ function App() {
                   {category.items.map((cert, index) => (
                     
                     /* THE CARD: Fixed Width (280px) and Fixed Height (380px) */
-                    <div key={index} className="min-w-[280px] w-[280px] h-[300px] flex-shrink-0 group relative bg-[#111] border border-gray-800 rounded-xl overflow-hidden hover:border-cyan-500/30 transition-all hover:-translate-y-1 flex flex-col">
+                    <div key={index} className="min-w-[280px] w-[280px] h-[280px] flex-shrink-0 group relative bg-[#111] border border-gray-800 rounded-xl overflow-hidden hover:border-cyan-500/30 transition-all hover:-translate-y-1 flex flex-col">
                       
                       {/* Thumbnail Area: Fixed Height (160px) & Object Cover (Crops to fit) */}
                       <div className="h-[160px] w-full bg-gray-900 overflow-hidden relative border-b border-gray-800">
