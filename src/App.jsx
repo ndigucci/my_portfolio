@@ -637,7 +637,7 @@ function App() {
             <div className="flex items-center mb-12">
               <span className="h-px flex-1 bg-gray-800"></span><h2 className="px-4 text-3xl md:text-4xl font-bold text-white tracking-tight">Technical Skills</h2><span className="h-px flex-1 bg-gray-800"></span>
             </div>
-           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
               <div className="p-6 bg-[#111] border border-gray-800 rounded-xl hover:border-cyan-500/50 transition-colors duration-300 group">
                 <div className="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cyan-500/20 transition"><span className="text-2xl">💻</span></div>
                 <h3 className="text-xl font-bold text-white mb-4">Tech & Cyber</h3>
@@ -690,9 +690,7 @@ function App() {
         </section>
       </RevealOnScroll>
 
-      {/* --- NEW: CATEGORIZED CERTIFICATES SECTION --- */}
-      <RevealOnScroll>
-        {/* --- CERTIFICATES SECTION (FIXED SIZES & HIDDEN SCROLLBAR) --- */}
+      {/* --- CERTIFICATES SECTION (FIXED SIZES & HIDDEN SCROLLBAR) --- */}
       <RevealOnScroll>
         <section id="certificates" className="py-24 px-4 bg-white/5">
           {/* Internal Style to Force Hide Scrollbar */}
@@ -708,12 +706,6 @@ function App() {
             
             {/* Category Loop */}
             {certificateCategories.map((category, catIndex) => (
-              <div key={catIndex} className="mb-12">
-                <h3 className="text-2xl font-bold text-gray-300 mb-6 border-l-4 border-cyan-500 pl-4">{category.title}</h3>
-                
-                {/* Horizontal Scroll Container */}
-                <div className="flex overflow-x-auto gap-6 pb-6 no-scrollbar">
-                 {certificateCategories.map((category, catIndex) => (
               <div key={catIndex} className="mb-12">
                 
                 {/* CATEGORY TITLE + SCROLL ARROW */}
@@ -770,34 +762,9 @@ function App() {
                 </div>
               </div>
             ))}
-                      {/* Content Area */}
-                      <div className="p-5 flex flex-col flex-grow">
-                        {/* Title: Restricted to 2 lines so it doesn't push content down */}
-                        <h3 className="font-bold text-white text-lg mb-2 line-clamp-2 h-[56px] overflow-hidden leading-tight">
-                          {cert.title}
-                        </h3>
-                        
-                        <p className="text-sm text-gray-400 mb-4">{cert.issuer}</p>
-                        
-                        {/* Footer (Date & Link) - Pushed to bottom */}
-                        <div className="mt-auto flex justify-between items-center pt-4 border-t border-gray-800">
-                          <p className="text-xs text-cyan-500 font-mono">{cert.date}</p>
-                          {cert.link && (
-                            <a href={cert.link} target="_blank" rel="noreferrer" className="text-xs font-bold text-gray-300 hover:text-white flex items-center gap-1">
-                              View Full ↗
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
 
           </div>
         </section>
-      </RevealOnScroll>
       </RevealOnScroll>
 
       {/* --- BLOG SECTION --- */}
