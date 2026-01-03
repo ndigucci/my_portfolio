@@ -706,13 +706,13 @@ function App() {
                 
                 {/* Horizontal Scroll Container */}
                 <div className="flex overflow-x-auto gap-6 pb-6 no-scrollbar">
-                  {category.items.map((cert, index) => (
+                 {category.items.map((cert, index) => (
                     
-                    /* THE CARD: Fixed Width (280px) and Fixed Height (380px) */
-                    <div key={index} className="min-w-[280px] w-[280px] h-[280px] flex-shrink-0 group relative bg-[#111] border border-gray-800 rounded-xl overflow-hidden hover:border-cyan-500/30 transition-all hover:-translate-y-1 flex flex-col">
+                    /* THE CARD: Same Fixed Size (280px x 380px) */
+                    <div key={index} className="min-w-[280px] w-[280px] h-[380px] flex-shrink-0 group relative bg-[#111] border border-gray-800 rounded-xl overflow-hidden hover:border-cyan-500/30 transition-all hover:-translate-y-1 flex flex-col">
                       
-                      {/* Thumbnail Area: Fixed Height (160px) & Object Cover (Crops to fit) */}
-                      <div className="h-[160px] w-full bg-gray-900 overflow-hidden relative border-b border-gray-800">
+                      {/* 1. IMAGE AREA: Increased height from 160px to 230px */}
+                      <div className="h-[230px] w-full bg-gray-900 overflow-hidden relative border-b border-gray-800">
                         {cert.image ? (
                           <img src={cert.image} alt={cert.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
                         ) : (
@@ -723,6 +723,28 @@ function App() {
                         </div>
                       </div>
 
+                      {/* 2. TEXT AREA: Reduced padding (p-4) to fit content in smaller space */}
+                      <div className="p-4 flex flex-col flex-grow">
+                        
+                        {/* Title: Still limited to 2 lines */}
+                        <h3 className="font-bold text-white text-md mb-1 line-clamp-2 leading-tight">
+                          {cert.title}
+                        </h3>
+                        
+                        <p className="text-xs text-gray-400 mb-2">{cert.issuer}</p>
+                        
+                        {/* Footer: Pushed to bottom */}
+                        <div className="mt-auto flex justify-between items-center pt-2 border-t border-gray-800">
+                          <p className="text-xs text-cyan-500 font-mono">{cert.date}</p>
+                          {cert.link && (
+                            <a href={cert.link} target="_blank" rel="noreferrer" className="text-xs font-bold text-gray-300 hover:text-white flex items-center gap-1">
+                              View Full ↗
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                       {/* Content Area */}
                       <div className="p-5 flex flex-col flex-grow">
                         {/* Title: Restricted to 2 lines so it doesn't push content down */}
