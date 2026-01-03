@@ -712,7 +712,7 @@ function App() {
                     <div key={index} className="min-w-[280px] w-[280px] h-[320px] flex-shrink-0 group relative bg-[#111] border border-gray-800 rounded-xl overflow-hidden hover:border-cyan-500/30 transition-all hover:-translate-y-1 flex flex-col">
                       
                       {/* IMAGE AREA: Balanced height at 180px */}
-                      <div className="h-[180px] w-full bg-gray-900 overflow-hidden relative border-b border-gray-800">
+                      <div className="h-[200px] w-full bg-gray-900 overflow-hidden relative border-b border-gray-800">
                         {cert.image ? (
                           <img src={cert.image} alt={cert.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
                         ) : (
