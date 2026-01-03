@@ -35,56 +35,293 @@ const RevealOnScroll = ({ children }) => {
   );
 };
 
-// --- COMPONENT: TERMINAL ---
+// --- COMPONENT: HEALTH TERMINAL (ADVANCED LOGIC) ---
 const Terminal = ({ onClose }) => {
+  // --- MEDICAL KNOWLEDGE BASE (STATIC DATA) ---
+  const MED_DB = {
+    paracetamol: { use: "Pain relief, Fever", warning: "Liver toxicity if overdosed", side_effects: "Nausea, Rash", adult_dose: "500mg-1g every 4-6h (Max 4g/day)" },
+    ibuprofen: { use: "Inflammation, Pain", warning: "Stomach ulcers, Asthma triggers", side_effects: "Stomach pain, Heartburn", adult_dose: "200mg-400mg every 4-6h" },
+    amoxicillin: { use: "Bacterial infections", warning: "Finish full course. Penicillin allergy risk", side_effects: "Diarrhea, Nausea", adult_dose: "Prescription only. Usually 500mg every 8h" },
+    cetirizine: { use: "Allergies, Hay fever", warning: "May cause drowsiness", side_effects: "Dry mouth, Fatigue", adult_dose: "10mg once daily" },
+    coartem: { use: "Malaria treatment", warning: "Take with fatty food/milk", side_effects: "Headache, Dizziness", adult_dose: "Strictly as prescribed (3-day course)" }
+  };
+
+  const FIRST_AID_DB = {
+    burn: "1. Cool with running water (20 mins).\n2. Remove tight items.\n3. Cover with cling film.\n4. NO ice, NO butter.",
+    bleeding: "1. Apply direct pressure.\n2. Elevate limb.\n3. Apply dressing.\n4. If severe, call Emergency.",
+    fracture: "1. Immobilize area.\n2. Stop bleeding if any.\n3. Do not try to realign bone.\n4. Seek X-ray immediately.",
+    choking: "1. Encourage coughing.\n2. Back blows (5 times).\n3. Abdominal thrusts (Heimlich).\n4. Call Emergency."
+  };
+
+  const PREVENTION_DB = {
+    malaria: "1. Sleep under ITN nets.\n2. Eliminate standing water.\n3. Use repellents (DEET).",
+    flu: "1. Annual vaccination.\n2. Hand washing.\n3. Avoid close contact with sick people.",
+    covid: "1. Vaccination.\n2. Masks in crowded areas.\n3. Ventilation.\n4. Hand hygiene."
+  };
+
+  // --- STATE MANAGEMENT ---
   const [history, setHistory] = useState([
-    { type: 'output', content: 'Initializing Kali Linux environment...' },
-    { type: 'output', content: 'Access granted. Welcome, Guest.' },
-    { type: 'output', content: 'Type "help" to see available commands.' },
+    { type: 'system', content: 'HealthOS v2.0 Initializing...' },
+    { type: 'system', content: 'Loading Medical Modules... [OK]' },
+    { type: 'warning', content: '⚠ DISCLAIMER: This system provides general information ONLY. It does not replace a doctor or pharmacist. In emergencies, go to a hospital.' },
+    { type: 'output', content: 'Welcome root@health. Type "help" for commands.' },
   ]);
   const [input, setInput] = useState('');
+  
+  // FLOW STATE: Controls multi-step questions (sick flow, dosage flow)
+  const [flow, setFlow] = useState({ mode: 'default', step: 0, data: {} }); 
   const bottomRef = useRef(null);
 
+  // Auto-scroll to bottom
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [history]);
 
+  // --- LOGIC HANDLERS ---
+
+  const addToHistory = (type, content) => {
+    setHistory(prev => [...prev, { type, content }]);
+  };
+
   const handleCommand = (e) => {
     if (e.key === 'Enter') {
-      const cmd = input.trim().toLowerCase();
-      const newHistory = [...history, { type: 'input', content: input }];
-      let response = '';
-      switch (cmd) {
-        case 'help': response = 'Available commands: help, whoami, skills, contact, clear, exit'; break;
-        case 'whoami': response = 'User: Guest | Role: Recruiter/Visitor | Access: Restricted'; break;
-        case 'skills': response = 'Loading... Python, Kali Linux, Wireshark, Burp Suite, Metasploit'; break;
-        case 'contact': response = 'Email: irumvabonheur@icloud.com | Status: Open to work'; break;
-        case 'clear': setHistory([]); setInput(''); return;
-        case 'exit': onClose(); return;
-        default: response = `Command not found: ${cmd}. Type "help" for assistance.`;
-      }
-      setHistory([...newHistory, { type: 'output', content: response }]);
+      const cmdRaw = input.trim();
+      if (!cmdRaw && flow.mode === 'default') return;
+
+      // Add user input to history
+      addToHistory('input', cmdRaw);
       setInput('');
+
+      // ROUTING: Check if we are in a Flow or Default Mode
+      if (flow.mode === 'default') {
+        processDefaultCommand(cmdRaw.toLowerCase());
+      } else {
+        processFlowInput(cmdRaw);
+      }
+    }
+  };
+
+  // --- 1. DEFAULT COMMAND PROCESSOR ---
+  const processDefaultCommand = (cmd) => {
+    const args = cmd.split(' ');
+    const command = args[0];
+    const param = args.slice(1).join(' ');
+
+    switch (command) {
+      case 'help':
+        addToHistory('output', `
+AVAILABLE COMMANDS:
+  sick                 - Start symptom triage flow
+  medicine_info <name> - Get drug details (e.g., medicine_info paracetamol)
+  dosage_check         - Check general dosage guidelines
+  interaction_check    - Check drug pairs for warnings
+  first_aid <issue>    - Basic steps (burn, bleeding, fracture)
+  prevention <disease> - Prevention tips (malaria, flu)
+  emergency            - Show emergency warning signs
+  clear                - Clear screen
+  exit                 - Close terminal
+        `);
+        break;
+
+      case 'clear':
+        setHistory([]);
+        break;
+
+      case 'exit':
+        onClose();
+        break;
+
+      case 'emergency':
+        addToHistory('error', `
+!!! EMERGENCY WARNING SIGNS !!!
+Seek IMMEDIATE hospital care if:
+- Difficulty breathing or chest pain
+- Severe bleeding that won't stop
+- Sudden severe headache or confusion
+- Loss of consciousness
+- Seizures
+        `);
+        break;
+
+      case 'sick':
+        setFlow({ mode: 'sick', step: 1, data: {} });
+        addToHistory('system', 'INTAKE STARTED. Please answer briefly.');
+        addToHistory('query', '1. List your main symptoms (comma separated):');
+        break;
+
+      case 'dosage_check':
+        setFlow({ mode: 'dosage', step: 1, data: {} });
+        addToHistory('query', '1. What is the medicine name?');
+        break;
+
+      case 'interaction_check':
+        setFlow({ mode: 'interaction', step: 1, data: {} });
+        addToHistory('query', 'Enter the names of medicines you are taking (comma separated):');
+        break;
+
+      case 'medicine_info':
+        if (!param) {
+          addToHistory('error', 'Usage: medicine_info <name>');
+        } else {
+          const med = MED_DB[param];
+          if (med) {
+            addToHistory('output', `
+DRUG: ${param.toUpperCase()}
+-------------------------
+[USE]: ${med.use}
+[WARNING]: ${med.warning}
+[SIDE EFFECTS]: ${med.side_effects}
+            `);
+          } else {
+            addToHistory('warning', `Medicine "${param}" not found in local DB. Consult a pharmacist.`);
+          }
+        }
+        break;
+
+      case 'first_aid':
+        if (FIRST_AID_DB[param]) {
+          addToHistory('output', `FIRST AID FOR: ${param.toUpperCase()}\n${FIRST_AID_DB[param]}`);
+        } else {
+          addToHistory('error', 'Unknown condition. Try: burn, bleeding, fracture, choking.');
+        }
+        break;
+
+      case 'prevention':
+        if (PREVENTION_DB[param]) {
+          addToHistory('output', `PREVENTION TIPS: ${param.toUpperCase()}\n${PREVENTION_DB[param]}`);
+        } else {
+          addToHistory('error', 'Unknown disease. Try: malaria, flu, covid.');
+        }
+        break;
+
+      default:
+        addToHistory('error', `Command not found: ${command}. Type "help".`);
+    }
+  };
+
+  // --- 2. MULTI-STEP FLOW PROCESSOR ---
+  const processFlowInput = (input) => {
+    // === SICK FLOW ===
+    if (flow.mode === 'sick') {
+      const currentData = { ...flow.data };
+
+      if (flow.step === 1) { // Symptoms
+        currentData.symptoms = input;
+        setFlow({ mode: 'sick', step: 2, data: currentData });
+        addToHistory('query', '2. Duration? (e.g., 2 days, 1 week):');
+      } 
+      else if (flow.step === 2) { // Duration
+        currentData.duration = input;
+        setFlow({ mode: 'sick', step: 3, data: currentData });
+        addToHistory('query', '3. Severity? (mild / moderate / severe):');
+      } 
+      else if (flow.step === 3) { // Severity
+        currentData.severity = input.toLowerCase();
+        setFlow({ mode: 'sick', step: 4, data: currentData });
+        addToHistory('query', '4. Any DANGER SIGNS? (Chest pain, Diff breathing, Confusion) [yes/no]:');
+      } 
+      else if (flow.step === 4) { // Triage Logic
+        const danger = input.toLowerCase().includes('yes');
+        const severe = currentData.severity.includes('severe');
+        
+        addToHistory('system', 'ANALYZING DATA...');
+        
+        // TRIAGE ALGORITHM
+        setTimeout(() => {
+          if (danger) {
+            addToHistory('error', '>>> TRIAGE: RED (EMERGENCY) <<<');
+            addToHistory('output', 'Danger signs detected. Go to the nearest Hospital immediately.');
+          } else if (severe) {
+            addToHistory('warning', '>>> TRIAGE: ORANGE (URGENT) <<<');
+            addToHistory('output', 'Severe symptoms detected. Visit a Health Center or Doctor today.');
+          } else {
+            addToHistory('success', '>>> TRIAGE: GREEN (ROUTINE) <<<');
+            addToHistory('output', 'Symptoms appear mild. Monitor at home or visit a Pharmacy.');
+          }
+          setFlow({ mode: 'default', step: 0, data: {} }); // Reset
+        }, 800);
+      }
+    }
+
+    // === DOSAGE FLOW ===
+    else if (flow.mode === 'dosage') {
+      const currentData = { ...flow.data };
+      if (flow.step === 1) {
+        currentData.med = input.toLowerCase();
+        setFlow({ mode: 'dosage', step: 2, data: currentData });
+        addToHistory('query', '2. Age of patient?');
+      } else if (flow.step === 2) {
+        const age = parseInt(input);
+        const medData = MED_DB[currentData.med];
+
+        if (!medData) {
+          addToHistory('warning', 'Medicine not in database. Consult Pharmacist.');
+        } else {
+          addToHistory('output', `STANDARD ADULT DOSING FOR ${currentData.med.toUpperCase()}:`);
+          addToHistory('output', medData.adult_dose);
+          if (age < 12) addToHistory('warning', '⚠ WARNING: Pediatric (child) dosage varies by weight. Consult doctor.');
+        }
+        setFlow({ mode: 'default', step: 0, data: {} });
+      }
+    }
+
+    // === INTERACTION FLOW ===
+    else if (flow.mode === 'interaction') {
+      const meds = input.toLowerCase();
+      addToHistory('system', 'CHECKING DATABASE...');
+      
+      // Simple interaction logic rule
+      if (meds.includes('aspirin') && meds.includes('warfarin')) {
+        addToHistory('error', '⚠ ALERT: Major interaction detected (Bleeding risk).');
+      } else if (meds.includes('ibuprofen') && meds.includes('aspirin')) {
+        addToHistory('warning', '⚠ CAUTION: Increased risk of stomach ulcers.');
+      } else {
+        addToHistory('output', 'No specific severe interactions found in simple DB.');
+        addToHistory('output', 'Always ask your pharmacist for a full check.');
+      }
+      setFlow({ mode: 'default', step: 0, data: {} });
     }
   };
 
   return (
     <div className="bg-[#0c0c0c] w-full h-full text-green-500 font-mono p-4 rounded-lg flex flex-col border border-green-500/30 shadow-[0_0_30px_rgba(34,197,94,0.2)]">
       <div className="flex justify-between items-center border-b border-green-500/30 pb-2 mb-2">
-        <span className="text-xs">root@kali:~</span>
-        <button onClick={onClose} className="text-red-500 hover:text-red-400">✖</button>
+        <span className="text-xs">root@health:~</span>
+        <button onClick={onClose} className="text-red-500 hover:text-red-400 font-bold">✖ EXIT</button>
       </div>
-      <div className="flex-1 overflow-y-auto space-y-1 custom-scrollbar">
+      
+      {/* TERMINAL OUTPUT AREA */}
+      <div className="flex-1 overflow-y-auto space-y-1 custom-scrollbar p-2">
         {history.map((line, i) => (
-          <div key={i} className={`${line.type === 'input' ? 'text-white' : 'text-green-400'}`}>
+          <div key={i} className={`
+            ${line.type === 'input' ? 'text-white font-bold' : ''}
+            ${line.type === 'error' ? 'text-red-500 font-bold' : ''}
+            ${line.type === 'warning' ? 'text-yellow-400' : ''}
+            ${line.type === 'success' ? 'text-green-400 font-bold' : ''}
+            ${line.type === 'query' ? 'text-cyan-400' : ''}
+            ${line.type === 'system' ? 'text-gray-500 italic' : ''}
+            ${line.type === 'output' ? 'text-green-500' : ''}
+          `}>
             {line.type === 'input' ? '> ' : ''}{line.content}
           </div>
         ))}
         <div ref={bottomRef} />
       </div>
-      <div className="flex items-center mt-2">
-        <span className="text-green-500 mr-2">root@kali:~#</span>
-        <input type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleCommand} className="bg-transparent border-none outline-none flex-1 text-white" autoFocus />
+
+      {/* INPUT AREA */}
+      <div className="flex items-center mt-2 border-t border-green-500/30 pt-2">
+        <span className="text-green-500 mr-2">
+          {flow.mode === 'default' ? 'root@health:~#' : `[${flow.mode}] input:`}
+        </span>
+        <input 
+          type="text" 
+          value={input} 
+          onChange={(e) => setInput(e.target.value)} 
+          onKeyDown={handleCommand} 
+          className="bg-transparent border-none outline-none flex-1 text-white placeholder-gray-700" 
+          autoFocus 
+          placeholder={flow.mode === 'default' ? 'Type command...' : 'Type answer...'}
+        />
       </div>
     </div>
   );
@@ -357,11 +594,11 @@ function App() {
     },
     {
       id: 2,
-      title: "Cybersecurity Lab",
-      subtitle: "Penetration Testing & Network Security",
+      title: "Health Assistant CLI",
+      subtitle: "Guidance, Triage & First Aid",
       type: "terminal",
-      desc: "Interactive system security and ethical hacking environment. Click to access the terminal.",
-      tags: ["Kali Linux", "Security", "Bash"],
+      desc: "Interactive command-line health assistant for triage and education. Click to launch.",
+      tags: ["React", "Triage", "CLI"],
       color: "green"
     },
     {
@@ -500,7 +737,7 @@ function App() {
   return (
     <div className={`min-h-screen bg-[#0a0a0a] text-gray-200 font-sans selection:bg-cyan-500 selection:text-black ${(activeModal || showCV || showCrypto || activeBlog) ? 'overflow-hidden max-h-screen' : ''}`}>
       
-      {/* --- GO TO TOP BUTTON (PRESERVED SIZE w-4 h-4) --- */}
+      {/* --- GO TO TOP BUTTON --- */}
       {showScrollBtn && (
         <button 
           onClick={scrollToTop} 
@@ -725,10 +962,10 @@ function App() {
                   {category.items.map((cert, index) => (
                     
                     /* THE COMPACT CARD (320px Height) */
-                    <div key={index} className="min-w-[280px] w-[280px] h-[300px] flex-shrink-0 group relative bg-[#111] border border-gray-800 rounded-xl overflow-hidden hover:border-cyan-500/30 transition-all hover:-translate-y-1 flex flex-col">
+                    <div key={index} className="min-w-[280px] w-[280px] h-[320px] flex-shrink-0 group relative bg-[#111] border border-gray-800 rounded-xl overflow-hidden hover:border-cyan-500/30 transition-all hover:-translate-y-1 flex flex-col">
                       
                       {/* IMAGE AREA (180px) */}
-                      <div className="h-[150px] w-full bg-gray-900 overflow-hidden relative border-b border-gray-800">
+                      <div className="h-[180px] w-full bg-gray-900 overflow-hidden relative border-b border-gray-800">
                         {cert.image ? (
                           <img src={cert.image} alt={cert.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
                         ) : (
@@ -742,7 +979,7 @@ function App() {
                       {/* TEXT AREA (Compact) */}
                       <div className="p-3 flex flex-col flex-grow justify-between">
                         <div>
-                            <h3 className="font-bold text-white text-sm mb-2 line-clamp-2 leading-tight">
+                            <h3 className="font-bold text-white text-sm mb-1 line-clamp-2 leading-tight">
                               {cert.title}
                             </h3>
                             <p className="text-xs text-gray-400">{cert.issuer}</p>
