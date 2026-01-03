@@ -22,7 +22,7 @@ const PREVENTION_DB = {
   covid: "1. Vaccination.\n2. Masks in crowded areas.\n3. Ventilation.\n4. Hand hygiene."
 };
 
-// --- TYPEWRITER COMPONENT (The Magic Effect) ---
+// --- TYPEWRITER COMPONENT ---
 const TypewriterLine = ({ text, onComplete }) => {
   const [displayedText, setDisplayedText] = useState('');
   
@@ -35,7 +35,7 @@ const TypewriterLine = ({ text, onComplete }) => {
         clearInterval(intervalId);
         onComplete && onComplete();
       }
-    }, 20); // Speed: 20ms per character
+    }, 15); // Made it slightly faster (15ms) for snappier feel
     return () => clearInterval(intervalId);
   }, [text, onComplete]);
 
@@ -48,14 +48,26 @@ const Terminal = ({ onClose }) => {
     { type: 'system', content: 'HealthOS v2.0 Initializing...', needsTyping: true },
   ]);
   const [input, setInput] = useState('');
-  const [isTyping, setIsTyping] = useState(true); // Locks input while typing
+  const [isTyping, setIsTyping] = useState(true); 
   const [flow, setFlow] = useState({ mode: 'default', step: 0, data: {} }); 
+  
   const bottomRef = useRef(null);
+  const inputRef = useRef(null); // Reference to the input box
 
-  // Auto-scroll
+  // 1. AUTO-SCROLL to bottom
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [history, isTyping]);
+
+  // 2. AUTO-FOCUS INPUT whenever typing stops
+  useEffect(() => {
+    if (!isTyping) {
+      // Small timeout ensures the DOM is ready and enabled
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 10);
+    }
+  }, [isTyping]);
 
   // Initial Boot Sequence
   useEffect(() => {
@@ -72,11 +84,9 @@ const Terminal = ({ onClose }) => {
   };
 
   const handleLineComplete = (index) => {
-    // Only unlock if it's the last line
     if (index === history.length - 1) {
       setIsTyping(false);
     }
-    // Mark line as done so it doesn't re-type on re-render
     const newHistory = [...history];
     newHistory[index].needsTyping = false;
     setHistory(newHistory);
@@ -87,15 +97,14 @@ const Terminal = ({ onClose }) => {
       const cmdRaw = input.trim();
       if (!cmdRaw && flow.mode === 'default') return;
 
-      // Add user input immediately (no typing effect for user)
       setHistory(prev => [...prev, { type: 'input', content: cmdRaw, needsTyping: false }]);
       setInput('');
       
-      // Process logic with a slight "thinking" delay
+      // Process logic with a slight delay
       setTimeout(() => {
          if (flow.mode === 'default') processDefaultCommand(cmdRaw.toLowerCase());
          else processFlowInput(cmdRaw);
-      }, 300);
+      }, 200);
     }
   };
 
@@ -220,7 +229,7 @@ const Terminal = ({ onClose }) => {
         </div>
         
         {/* History Area */}
-        <div className="flex-1 overflow-y-auto space-y-1 custom-scrollbar p-2" onClick={() => document.getElementById('terminalInput').focus()}>
+        <div className="flex-1 overflow-y-auto space-y-1 custom-scrollbar p-2" onClick={() => inputRef.current?.focus()}>
           {history.map((line, i) => (
             <div key={i} className={`
               ${line.type === 'input' ? 'text-white font-bold' : ''}
@@ -231,7 +240,6 @@ const Terminal = ({ onClose }) => {
               ${line.type === 'system' ? 'text-gray-500 italic' : ''}
             `}>
               {line.type === 'input' ? '> ' : ''}
-              {/* If it needs typing AND it is the latest line, type it. Otherwise show text. */}
               {line.needsTyping && i === history.length - 1 ? (
                 <TypewriterLine text={line.content} onComplete={() => handleLineComplete(i)} />
               ) : (
@@ -248,6 +256,7 @@ const Terminal = ({ onClose }) => {
             {flow.mode === 'default' ? 'root@health:~#' : `[${flow.mode}] >`}
           </span>
           <input 
+            ref={inputRef} // <--- THIS is what lets us control focus
             id="terminalInput"
             type="text" 
             value={input} 
