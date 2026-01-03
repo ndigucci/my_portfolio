@@ -409,6 +409,13 @@ function App() {
           date: "2025",
           image:"/cyber.jpg",
           link:"/cyber.jpg"
+        },
+        {
+          title: "INTRODUCTION TO ARTIFICIAL INTELLIGENCE (AI)",
+          issuer: "IBM/Coursera",
+          date: "2025",
+          image:"/intro.jpg",
+          link:"/intro.jpg"
         }
       ]
     },
