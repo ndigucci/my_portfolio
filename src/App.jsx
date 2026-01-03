@@ -416,6 +416,13 @@ function App() {
           date: "2025",
           image:"/intro.jpg",
           link:"/intro.jpg"
+        },
+        {
+          title: "PYTHON FOR DATA SCIENCE, AI & DEVELOPMENT",
+          issuer: "Google developer",
+          date: "2025",
+          image:"/pthon.jpg",
+          link:"/pthon.jpg"
         }
       ]
     },
