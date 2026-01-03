@@ -383,11 +383,25 @@ function App() {
       title: "🛡️ Cybersecurity & Tech",
       items: [
         {
-          title: "Google Cybersecurity Professional",
-          issuer: "Coursera / Google",
+          title: "DTP BIGNNER AI&ML COMPLETION",
+          issuer: "DTP program/ conerstone",
           date: "2024",
           image: "/cert1.jpg", 
           link: "/cert1.jpg"
+        },
+        {
+          title: "DTP INTERMEDIATE AI&ML COMPLETION",
+          issuer: "DTP Propgram/cornerstone",
+          date: "2025",
+          image: "/cert2.jpg",
+          link: "/cert2.jpg"
+        },
+        {
+          title: "DTP ADVANCED AI&ML COMPLETION",
+          issuer: "DTP program/ cornerstone",
+          date: "2025",
+          image: "/cert3.jpg",
+          link: "/cert3.jpg"
         }
       ]
     },
