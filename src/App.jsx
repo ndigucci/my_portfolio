@@ -410,10 +410,10 @@ function App() {
       items: [
         {
           title: "AI for Healthcare",
-          issuer: "DeepLearning.AI",
-          date: "2023",
-          image: "/cert2.jpg", 
-          link: "/cert2.jpg"
+          issuer: "WHO Organization",
+          date: "2025",
+          image: "/image.jpg", 
+          link: "/image.jpg"
         },
         {
           title: "Certified Pharmacy Researcher",
