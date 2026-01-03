@@ -742,7 +742,7 @@ function App() {
                       {/* TEXT AREA (Compact) */}
                       <div className="p-3 flex flex-col flex-grow justify-between">
                         <div>
-                            <h3 className="font-bold text-white text-sm mb-1 line-clamp-2 leading-tight">
+                            <h3 className="font-bold text-white text-sm mb-2 line-clamp-2 leading-tight">
                               {cert.title}
                             </h3>
                             <p className="text-xs text-gray-400">{cert.issuer}</p>
