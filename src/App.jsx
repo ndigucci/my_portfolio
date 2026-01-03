@@ -708,11 +708,11 @@ function App() {
                 <div className="flex overflow-x-auto gap-6 pb-6 no-scrollbar">
                  {category.items.map((cert, index) => (
                     
-                    /* THE CARD: Same Fixed Size (280px x 380px) */
-                    <div key={index} className="min-w-[280px] w-[280px] h-[380px] flex-shrink-0 group relative bg-[#111] border border-gray-800 rounded-xl overflow-hidden hover:border-cyan-500/30 transition-all hover:-translate-y-1 flex flex-col">
+                    /* THE CARD: REDUCED HEIGHT from 380px to 320px */
+                    <div key={index} className="min-w-[280px] w-[280px] h-[320px] flex-shrink-0 group relative bg-[#111] border border-gray-800 rounded-xl overflow-hidden hover:border-cyan-500/30 transition-all hover:-translate-y-1 flex flex-col">
                       
-                      {/* 1. IMAGE AREA: Increased height from 160px to 230px */}
-                      <div className="h-[250px] w-full bg-gray-900 overflow-hidden relative border-b border-gray-800">
+                      {/* IMAGE AREA: Balanced height at 180px */}
+                      <div className="h-[180px] w-full bg-gray-900 overflow-hidden relative border-b border-gray-800">
                         {cert.image ? (
                           <img src={cert.image} alt={cert.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
                         ) : (
@@ -723,27 +723,29 @@ function App() {
                         </div>
                       </div>
 
-                      {/* 2. TEXT AREA: Reduced padding (p-4) to fit content in smaller space */}
-                      <div className="p-3 flex flex-col flex-grow">
+                      {/* TEXT AREA: Reduced padding to p-3 for a tighter fit */}
+                      <div className="p-3 flex flex-col flex-grow justify-between">
+                        <div>
+                            {/* Title */}
+                            <h3 className="font-bold text-white text-sm mb-1 line-clamp-2 leading-tight">
+                              {cert.title}
+                            </h3>
+                            {/* Issuer */}
+                            <p className="text-xs text-gray-400">{cert.issuer}</p>
+                        </div>
                         
-                        {/* Title: Still limited to 2 lines */}
-                        <h3 className="font-bold text-white text-md mb-1 line-clamp-2 leading-tight">
-                          {cert.title}
-                        </h3>
-                        
-                        <p className="text-xs text-gray-400 mb-2">{cert.issuer}</p>
-                        
-                        {/* Footer: Pushed to bottom */}
-                        <div className="mt-auto flex justify-between items-center pt-2 border-t border-gray-800">
-                          <p className="text-xs text-cyan-500 font-mono">{cert.date}</p>
+                        {/* Footer */}
+                        <div className="flex justify-between items-center pt-2 border-t border-gray-800 mt-2">
+                          <p className="text-[10px] text-cyan-500 font-mono">{cert.date}</p>
                           {cert.link && (
-                            <a href={cert.link} target="_blank" rel="noreferrer" className="text-xs font-bold text-gray-300 hover:text-white flex items-center gap-1">
-                              View Full ↗
+                            <a href={cert.link} target="_blank" rel="noreferrer" className="text-[10px] font-bold text-gray-300 hover:text-white flex items-center gap-1">
+                              View ↗
                             </a>
                           )}
                         </div>
                       </div>
                     </div>
+                  ))}
                   ))}
                       {/* Content Area */}
                       <div className="p-5 flex flex-col flex-grow">
