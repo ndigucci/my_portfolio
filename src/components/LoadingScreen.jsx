@@ -4,16 +4,17 @@ const LoadingScreen = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    // Animate progress 0 -> 100
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(onComplete, 500); 
+          setTimeout(onComplete, 500); // Wait 0.5s before fading out
           return 100;
         }
-        return prev + 2; 
+        return prev + 2; // Speed of loading
       });
-    }, 40);
+    }, 30);
 
     return () => clearInterval(interval);
   }, [onComplete]);
@@ -21,16 +22,16 @@ const LoadingScreen = ({ onComplete }) => {
   return (
     <div className="fixed inset-0 z-[200] flex flex-col items-center justify-center font-sans text-white bg-gradient-to-br from-[#0f172a] via-[#1e1a78] to-[#0f172a]">
       
-      {/* 1. Circular Spinner (The Ring) */}
+      {/* 1. Circular Spinner */}
       <div className="relative w-24 h-24 mb-8">
         <div className="absolute inset-0 border-4 border-white/20 rounded-full"></div>
         <div className="absolute inset-0 border-4 border-t-cyan-500 border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
       </div>
 
-      {/* 2. Name */}
-      <h1 className="text-3xl font-bold mb-2 tracking-wide">NDI GUCCI</h1>
+      {/* 2. Your Name */}
+      <h1 className="text-3xl font-bold mb-2 tracking-wide uppercase">NDI GUCCI</h1>
 
-      {/* 3. Text & Progress Bar */}
+      {/* 3. Progress Text & Bar */}
       <div className="w-64">
         <div className="flex justify-between text-xs text-gray-400 mb-2 font-mono">
           <span>Preparing Experience...</span>
