@@ -655,7 +655,16 @@ function App() {
           </a>
         </div>
       </div>
-      </>
+    {showScrollBtn && (
+      <button 
+        onClick={scrollToTop} 
+        className="fixed bottom-6 right-6 bg-cyan-600 text-white p-3 rounded-full shadow-lg hover:bg-cyan-500 transition-transform hover:-translate-y-1 z-50"
+        title="Scroll to Top"
+      >
+        ↑
+      </button>
+    )}
+    </>     
   );
 }
 
