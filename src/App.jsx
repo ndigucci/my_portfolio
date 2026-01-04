@@ -477,15 +477,31 @@ function App() {
 
        {/* --- SKILLS --- */}
         <RevealOnScroll>
-          <section id="skills" className={`py-24 px-4 ${isDarkMode ? 'bg-white/5' : 'bg-slate-100'}`}>
+          <section id="skills" className="py-24 px-4 bg-white/5">
             <div className="max-w-6xl mx-auto">
-              <h2 className={`text-3xl font-bold ${theme.heading} mb-12 border-l-4 border-cyan-500 pl-4`}>Technical Skills</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {['Python', 'React', 'Kali Linux', 'Pharmacy', 'Research', 'Git', 'AI / ML', 'Web Dev'].map(skill => (
-                  <div key={skill} className={`${theme.cardBg} p-6 rounded-xl border ${theme.cardBorder} text-center hover:border-cyan-500/50 hover:-translate-y-1 transition duration-300 shadow-sm`}>
-                    <span className={`font-bold ${theme.subText} hover:text-cyan-500 transition`}>{skill}</span>
+              <h2 className="text-3xl font-bold text-white mb-12 border-l-4 border-cyan-500 pl-4">Technical Skills</h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+                <div className="p-6 bg-[#111] border border-gray-800 rounded-xl hover:border-cyan-500/50 transition-colors duration-300 group">
+                  <div className="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cyan-500/20 transition"><span className="text-2xl">💻</span></div>
+                  <h3 className="text-xl font-bold text-white mb-4">Tech & Cyber</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {['Python', 'Linux (Kali)', 'AI Tools', 'Cybersecurity', 'Git'].map(skill => <span key={skill} className="text-xs font-mono px-2 py-1 bg-gray-800 text-cyan-400 rounded border border-gray-700">{skill}</span>)}
                   </div>
-                ))}
+                </div>
+                <div className="p-6 bg-[#111] border border-gray-800 rounded-xl hover:border-green-500/50 transition-colors duration-300 group">
+                  <div className="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-500/20 transition"><span className="text-2xl">💊</span></div>
+                  <h3 className="text-xl font-bold text-white mb-4">Healthcare</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {['Pharmacy', 'Med Safety', 'Research', 'Patient Care'].map(skill => <span key={skill} className="text-xs font-mono px-2 py-1 bg-gray-800 text-green-400 rounded border border-gray-700">{skill}</span>)}
+                  </div>
+                </div>
+                <div className="p-6 bg-[#111] border border-gray-800 rounded-xl hover:border-purple-500/50 transition-colors duration-300 group">
+                  <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition"><span className="text-2xl">⚡️</span></div>
+                  <h3 className="text-xl font-bold text-white mb-4">Productivity</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {['Mendeley', 'PowerPoint', 'Office 365', 'Digital Workflows'].map(skill => <span key={skill} className="text-xs font-mono px-2 py-1 bg-gray-800 text-purple-400 rounded border border-gray-700">{skill}</span>)}
+                  </div>
+                </div>
               </div>
             </div>
           </section>
