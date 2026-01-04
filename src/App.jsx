@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Terminal from './components/Terminal'; 
-import LoadingScreen from './components/LoadingScreen'; // <--- IMPORT THE NEW COMPONENT
+import LoadingScreen from './components/LoadingScreen';
 
-// --- COMPONENT: SCROLL ANIMATION WRAPPER ---
+// --- SCROLL ANIMATION WRAPPER ---
 const RevealOnScroll = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
@@ -97,6 +97,7 @@ const ResearchModal = ({ project, onClose }) => (
     <div className="bg-zinc-900 w-full max-w-4xl p-8 rounded-lg border border-gray-700 relative overflow-y-auto max-h-[90vh]">
       <button onClick={onClose} className="absolute top-4 right-4 text-white text-xl hover:text-red-500">✖</button>
       
+      {/* Project Image Logic */}
       <div className="flex flex-col md:flex-row gap-6 mb-6">
         {project.image && (
           <div className="w-full md:w-1/3 h-48 rounded-lg overflow-hidden border border-gray-700">
@@ -125,6 +126,26 @@ const ResearchModal = ({ project, onClose }) => (
           </ul>
         </div>
       )}
+    </div>
+  </div>
+);
+
+const BlogModal = ({ blog, onClose }) => (
+  <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="bg-zinc-900 w-full max-w-3xl h-[80vh] relative animate-in zoom-in-95 duration-200 p-8 rounded-lg border border-gray-700 overflow-y-auto">
+      <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">✖</button>
+      <div className="max-w-3xl mx-auto">
+        <div className="mb-8 border-b border-gray-800 pb-8">
+          <div className="text-cyan-500 font-mono text-xs mb-2">{blog.date} | {blog.category}</div>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">{blog.title}</h2>
+          <div className="flex gap-2">
+             {blog.tags.map(tag => <span key={tag} className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded">#{tag}</span>)}
+          </div>
+        </div>
+        <div className="text-gray-300 leading-7 space-y-4 whitespace-pre-line">
+          {blog.content}
+        </div>
+      </div>
     </div>
   </div>
 );
@@ -233,7 +254,7 @@ function App() {
   const [activeBlog, setActiveBlog] = useState(null);
   const [showScrollBtn, setShowScrollBtn] = useState(false);
   
-  // --- NEW STATE: LOADING SCREEN ---
+  // --- LOADING SCREEN STATE ---
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -276,10 +297,10 @@ function App() {
 
   return (
     <>
-      {/* 1. SHOW LOADING SCREEN IF NOT LOADED */}
+      {/* 1. LOADING SCREEN */}
       {!isLoaded && <LoadingScreen onComplete={() => setIsLoaded(true)} />}
 
-      {/* 2. MAIN APP (Hidden until loaded) */}
+      {/* 2. MAIN APP */}
       <div className={`min-h-screen bg-[#0a0a0a] text-gray-200 font-sans selection:bg-cyan-500 selection:text-black transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         
         {/* --- MODALS --- */}
@@ -310,8 +331,9 @@ function App() {
               <img src="/me.jpg" alt="Bonheur" className="w-full h-full object-cover" />
             </div>
             <div className="flex-1 text-center md:text-left">
+              {/* RESTORED "Welcome to my portfolio" */}
               <div className="inline-block px-3 py-1 rounded-full bg-cyan-900/30 border border-cyan-500/30 text-cyan-400 text-sm font-mono mb-4">
-                Hello, World! 👋
+                Welcome to my portfolio
               </div>
               <h1 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight">HI, I'M <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">BONHEUR</span></h1>
               <div className="h-8 md:h-12 text-lg md:text-2xl text-gray-400 font-mono mb-8 flex justify-center md:justify-start items-center">
@@ -375,6 +397,7 @@ function App() {
               <div className="grid md:grid-cols-3 gap-8">
                 {projects.map((p, i) => (
                   <div key={i} onClick={() => setActiveModal(p)} className="group bg-[#111] rounded-2xl border border-gray-800 hover:border-gray-600 transition-all duration-300 hover:-translate-y-2 cursor-pointer overflow-hidden flex flex-col h-full">
+                    {/* IMAGE HEADER */}
                     <div className="h-48 w-full bg-gray-900 relative overflow-hidden">
                       {p.image ? (
                         <img src={p.image} alt={p.title} className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-transform duration-500" />
@@ -385,6 +408,7 @@ function App() {
                       )}
                       <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm text-[10px] font-bold text-white px-2 py-1 rounded border border-white/10 uppercase">{p.type}</div>
                     </div>
+                    {/* CONTENT */}
                     <div className="p-6 flex flex-col flex-grow">
                       <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">{p.title}</h3>
                       <p className="text-cyan-600 text-xs font-bold uppercase mb-3">{p.subtitle}</p>
@@ -412,10 +436,17 @@ function App() {
               <h2 className="text-3xl font-bold text-white mb-12 border-l-4 border-cyan-500 pl-4">Certificates</h2>
               {certificateCategories.map((cat, i) => (
                 <div key={i} className="mb-12">
+                  
+                  {/* RESTORED SCROLL INDICATOR */}
                   <div className="flex items-center justify-between mb-6">
                      <h3 className="text-xl text-gray-300">{cat.title}</h3>
-                     <span className="text-xs text-cyan-500 animate-pulse md:hidden">Swipe →</span>
+                     <div className="flex items-center gap-2 text-cyan-500 text-sm font-mono animate-pulse">
+                       <span className="hidden md:inline">Scroll</span>
+                       <span className="md:hidden">Swipe</span>
+                       <span>→</span>
+                     </div>
                   </div>
+
                   <div className="flex overflow-x-auto gap-4 pb-4 no-scrollbar">
                     {cat.items.map((cert, j) => (
                       <div key={j} className="min-w-[280px] h-[320px] bg-[#111] border border-gray-800 rounded-xl overflow-hidden flex flex-col hover:-translate-y-1 transition group">

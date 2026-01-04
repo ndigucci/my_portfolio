@@ -4,46 +4,45 @@ const LoadingScreen = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Animate the progress bar from 0 to 100% over ~2 seconds
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(onComplete, 200); // Wait a tiny bit at 100% before closing
+          setTimeout(onComplete, 500); 
           return 100;
         }
-        // Randomize speed to make it look realistic (like "loading assets")
-        const increment = Math.random() * 15; 
-        return Math.min(prev + increment, 100);
+        return prev + 2; 
       });
-    }, 200);
+    }, 40);
 
     return () => clearInterval(interval);
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 z-[200] bg-black text-white flex flex-col items-center justify-center font-mono">
+    <div className="fixed inset-0 z-[200] flex flex-col items-center justify-center font-sans text-white bg-gradient-to-br from-[#0f172a] via-[#1e1a78] to-[#0f172a]">
       
-      {/* 1. The Blinking Text / Name */}
-      <div className="mb-4 text-2xl md:text-4xl font-bold flex items-center gap-2">
-        <span className="text-cyan-500">&lt;</span> 
-        NDI GUCCI 
-        <span className="text-cyan-500">/&gt;</span>
-        <span className="animate-pulse w-3 h-8 bg-cyan-500 block ml-1"></span>
+      {/* 1. Circular Spinner (The Ring) */}
+      <div className="relative w-24 h-24 mb-8">
+        <div className="absolute inset-0 border-4 border-white/20 rounded-full"></div>
+        <div className="absolute inset-0 border-4 border-t-cyan-500 border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
       </div>
 
-      {/* 2. The Progress Bar Container */}
-      <div className="w-[200px] md:w-[300px] h-[2px] bg-gray-800 rounded-full relative overflow-hidden">
-        {/* The Moving Blue Bar */}
-        <div 
-          className="h-full bg-cyan-500 shadow-[0_0_15px_#06b6d4] transition-all duration-200 ease-out"
-          style={{ width: `${progress}%` }}
-        ></div>
-      </div>
+      {/* 2. Name */}
+      <h1 className="text-3xl font-bold mb-2 tracking-wide">NDI GUCCI</h1>
 
-      {/* 3. Percentage Text */}
-      <div className="mt-2 text-xs text-gray-500 font-mono">
-        {Math.round(progress)}% - {progress < 100 ? "Initializing..." : "Welcome."}
+      {/* 3. Text & Progress Bar */}
+      <div className="w-64">
+        <div className="flex justify-between text-xs text-gray-400 mb-2 font-mono">
+          <span>Preparing Experience...</span>
+          <span>{progress}%</span>
+        </div>
+        
+        <div className="w-full h-1 bg-gray-700 rounded-full overflow-hidden">
+          <div 
+            className="h-full bg-gradient-to-r from-cyan-500 to-blue-600 transition-all duration-100 ease-out"
+            style={{ width: `${progress}%` }}
+          ></div>
+        </div>
       </div>
 
     </div>
