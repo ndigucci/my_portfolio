@@ -32,7 +32,7 @@ const projects = [
     title: "AI in Pharmacy", 
     subtitle: "Machine Learning for Safety", 
     type: "research", 
-    image: "/project1.jpg", 
+    image: "/pharmai.jpg", 
     desc: "Research exploring AI in medication safety and drug interaction detection.", 
     tags: ["AI", "Research", "HealthTech"],
     abstract: "This study investigates the efficacy of Machine Learning algorithms in detecting potential drug-drug interactions (DDIs).", 
@@ -43,7 +43,7 @@ const projects = [
     title: "Health Assistant CLI", 
     subtitle: "Guidance & Triage", 
     type: "terminal", 
-    image: "/project2.jpg",
+    image: "/linus.jpg",
     desc: "Interactive command-line health assistant for triage and education. Click to try!", 
     tags: ["React", "Triage", "CLI"]
   },
@@ -52,7 +52,7 @@ const projects = [
     title: "Academic Research", 
     subtitle: "Pharma Data", 
     type: "research", 
-    image: "/project3.jpg",
+    image: "/academic.jpg",
     desc: "Advanced literature review and citation management for pharmaceutical sciences.", 
     tags: ["Mendeley", "Data", "Writing"],
     abstract: "A comprehensive review of digital tools used in modern pharmaceutical research.", 
@@ -65,12 +65,12 @@ const certificateCategories = [
   {
     title: "🛡️ Cybersecurity & Tech",
     items: [
-      { title: "DTP BEGINNER AI & ML", issuer: "Cornerstone", date: "2024", image: "/bignner.jpg", link: "/biggner.jpg" },
-      { title: "DTP INTERMEDIATE AI&ML", issuer: "Cornerstone", date: "2025", image: "/cert2.jpg", link: "/cert2.jpg" },
-      { title: "DTP ADVANCED AI&ML", issuer: "Cornerstone", date: "2025", image: "/addv.jpg", link: "/addv.jpg" },
+      { title: "DTP BEGINNER AI & ML", issuer: "Cornerstone/DTP", date: "2024", image: "/bignner.jpg", link: "/biggner.jpg" },
+      { title: "DTP INTERMEDIATE AI&ML", issuer: "Cornerstone/DTP", date: "2025", image: "/cert2.jpg", link: "/cert2.jpg" },
+      { title: "DTP ADVANCED AI&ML", issuer: "CornerstoneDTP", date: "2025", image: "/addv.jpg", link: "/addv.jpg" },
       { title: "CYBERSECURITY FUNDAMENTALS", issuer: "IBM/Coursera", date: "2025", image: "/cyber.jpg", link: "/cyber.jpg" },
       { title: "INTRO TO AI", issuer: "IBM/Coursera", date: "2025", image: "/intro.jpg", link: "/intro.jpg" },
-      { title: "PYTHON FOR DATA SCIENCE", issuer: "Google", date: "2025", image: "/pthon.jpg", link: "/pthon.jpg" },
+      { title: "PYTHON FOR DATA SCIENCE", issuer: "Google developers", date: "2025", image: "/pthon.jpg", link: "/pthon.jpg" },
       { title: "ICT ESSENTIALS", issuer: "ICDL Africa", date: "2025", image: "/icdlo.jpg", link: "/icdlo.jpg" },
       { title: "ICDL COURSE PROOF", issuer: "ICDL Africa", date: "2025", image: "/icdll.jpg", link: "/icdll.jpg" }
     ]
@@ -79,7 +79,7 @@ const certificateCategories = [
     title: "💊 Healthcare & Research",
     items: [
       { title: "RESEARCH COMMUNICATION", issuer: "WHO/TDR", date: "2025", image: "/image.jpg", link: "/image.jpg" },
-      { title: "Certified Pharmacy Researcher", issuer: "NPC", date: "2025", image: "/pharm.jpg", link: "/pharm.jpg" },
+      { title: "Certified Pharmacy Researcher", issuer: "NPC/NATIONAL PHARMACY COUNCIL", date: "2025", image: "/pharm.jpg", link: "/pharm.jpg" },
       { title: "Problem Solving in Health", issuer: "MINICT", date: "2025", image: "/prob.jpg", link: "/prob.jpg" }
     ]
   }
@@ -423,7 +423,7 @@ function App() {
               <div className="flex gap-4 justify-center md:justify-start">
                 <button onClick={() => scrollToSection('projects')} className="bg-cyan-600 px-8 py-3 rounded-lg text-white font-bold hover:bg-cyan-500 transition shadow-lg shadow-cyan-500/25">View Projects</button>
                 <button onClick={() => setShowCV(true)} className="border border-gray-700 px-8 py-3 rounded-lg hover:bg-white/5 transition flex items-center gap-2">
-                  View CV <span className="text-lg">📄</span>
+                  View CV <span className="text-lg">🥹</span>
                 </button>
                 <button onClick={() => setShowCrypto(true)} className="border border-yellow-500/30 bg-yellow-500/10 text-yellow-500 px-8 py-3 rounded-lg hover:bg-yellow-500 hover:text-black transition">
                    ⚡ Sponsor
