@@ -388,7 +388,7 @@ function App() {
     cardBorder: isDarkMode ? "border-gray-800" : "border-slate-200",
     heading: isDarkMode ? "text-white" : "text-slate-900",
     subText: isDarkMode ? "text-gray-400" : "text-slate-600",
-    navBg: isDarkMode ? "bg-[#0a0a0a]/80" : "bg-white/80"
+    navBg: isDarkMode ? "bg-[#0a0a0a]/60" : "bg-white/60"
   };
 
   return (
