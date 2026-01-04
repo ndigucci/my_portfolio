@@ -475,7 +475,7 @@ function App() {
           </div>
         </section>
 
-        {/* --- SKILLS --- */}
+       {/* --- SKILLS --- */}
         <RevealOnScroll>
           <section id="skills" className={`py-24 px-4 ${isDarkMode ? 'bg-white/5' : 'bg-slate-100'}`}>
             <div className="max-w-6xl mx-auto">
@@ -490,7 +490,6 @@ function App() {
             </div>
           </section>
         </RevealOnScroll>
-
         {/* --- PROJECTS --- */}
         <RevealOnScroll>
           <section id="projects" className="py-24 px-4">
