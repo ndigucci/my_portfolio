@@ -104,7 +104,6 @@ const ResearchModal = ({ project, onClose }) => (
         <p className="text-gray-400 italic">{project.subtitle}</p>
       </div>
       
-      {/* Show Project Image inside Modal too */}
       {project.image && (
         <div className="mb-6 w-full h-64 rounded-lg overflow-hidden border border-gray-700">
            <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
@@ -147,80 +146,145 @@ const BlogModal = ({ blog, onClose }) => (
   </div>
 );
 
-// --- UPDATED CV MODAL (FIXED CLOSE BUTTON) ---
+// --- COMPONENT: LIVE CV SHEET (FULL DATA + FIXED BUTTON) ---
 const CVModal = ({ onClose }) => (
   <div className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-0 md:p-4">
-    {/* Added 'relative' to container so absolute button positions inside it */}
     <div className="bg-white w-full h-full md:h-[95vh] md:max-w-[850px] relative overflow-y-auto p-8 text-black shadow-2xl">
       
-      {/* FIXED BUTTON: Changed 'fixed' to 'absolute' so it stays on the paper */}
+      {/* FIXED CLOSE BUTTON (Absolute positioning prevents it from floating away) */}
       <button 
         onClick={onClose} 
-        className="absolute top-4 right-4 bg-gray-200 text-gray-800 w-10 h-10 rounded-full hover:bg-red-500 hover:text-white transition flex items-center justify-center font-bold z-50"
+        className="absolute top-4 right-4 bg-gray-200 text-gray-800 w-10 h-10 rounded-full hover:bg-red-500 hover:text-white transition flex items-center justify-center font-bold z-50 shadow-md"
       >
         ✖
       </button>
       
-      <div className="border-b-2 border-gray-100 pb-8 mb-8 flex flex-col md:flex-row items-center gap-8">
-        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-cyan-500 shadow-lg">
-           <img src="/me.jpg" alt="Profile" className="w-full h-full object-cover" />
-        </div>
-        <div className="text-center md:text-left">
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">Bonheur Irumva</h1>
-          <p className="text-blue-600 font-bold tracking-wide uppercase text-sm mb-4">Pharmacy Student | AI & Cybersecurity Enthusiast</p>
-          <p className="text-slate-600 max-w-lg italic">"Bridging the gap between medical practice and digital innovation to improve healthcare safety."</p>
-        </div>
-      </div>
-
-      <div className="grid md:grid-cols-3 gap-8">
-        <div className="md:col-span-1 space-y-6">
-          <div>
-            <h3 className="font-bold text-slate-900 uppercase tracking-wider mb-3 border-b border-blue-500 inline-block">Contact</h3>
-            <p className="text-sm">📍 Rwanda</p>
-            <p className="text-sm">📧 irumvabonheur@icloud.com</p>
-            <p className="text-sm">🔗 ndigucci.vercel.app</p>
+      <div className="w-full h-full flex flex-col md:flex-row">
+        
+        {/* LEFT COLUMN (SIDEBAR) */}
+        <div className="w-full md:w-1/3 bg-slate-50 p-6 md:p-8 border-r border-slate-200 text-left">
+          <div className="w-32 h-32 mx-auto md:mx-0 mb-6 rounded-full overflow-hidden border-4 border-white shadow-lg">
+            <img src="/me.jpg" alt="Profile" className="w-full h-full object-cover" />
           </div>
-          <div>
-            <h3 className="font-bold text-slate-900 uppercase tracking-wider mb-3 border-b border-blue-500 inline-block">Skills</h3>
-            <div className="flex flex-wrap gap-2">
-              {['Python', 'React', 'Kali Linux', 'Pharmacy', 'Research', 'Git'].map(s => (
-                <span key={s} className="bg-slate-100 px-2 py-1 rounded text-xs font-semibold text-slate-700">{s}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="md:col-span-2 space-y-8">
-          <section>
-            <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2"><span className="text-blue-600">🎓</span> Education</h2>
-            <div className="mb-4">
-              <h3 className="font-bold text-lg">Bachelor of Pharmacy (BPharm)</h3>
-              <p className="text-slate-500 text-sm">INES Ruhengeri | Current</p>
-            </div>
-            <div className="mb-4">
-              <h3 className="font-bold text-lg">A-Level (MCB)</h3>
-              <p className="text-slate-500 text-sm">G.S REMERA RUKOMA | 2023 - 2025</p>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2"><span className="text-blue-600">💼</span> Experience</h2>
+          
+          <div className="space-y-6 text-sm">
             <div>
-              <h3 className="font-bold text-lg">Anti-AIDS Club Assistant</h3>
-              <p className="text-blue-600 text-sm mb-2">École de Dieu | 2024</p>
-              <ul className="list-disc list-inside text-sm text-slate-600">
-                <li>Assisted in health awareness campaigns.</li>
-                <li>Facilitated peer communication for better health outcomes.</li>
+              <h3 className="font-bold text-slate-900 uppercase tracking-wider mb-2 border-b-2 border-blue-500 inline-block">Contact</h3>
+              <p className="mt-2">📍 Rwanda</p>
+              <p>📧 irumvabonheur@icloud.com</p>
+              <p>🔗 ndigucci.vercel.app</p>
+              <p>🐙 github.com/ndigucci</p>
+            </div>
+
+            <div>
+              <h3 className="font-bold text-slate-900 uppercase tracking-wider mb-2 border-b-2 border-blue-500 inline-block">Tech Skills</h3>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {['Python', 'Kali Linux', 'Cybersecurity', 'Git', 'React', 'Mendeley'].map(s => (
+                  <span key={s} className="bg-white border border-slate-300 px-2 py-1 rounded text-xs font-semibold">{s}</span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-bold text-slate-900 uppercase tracking-wider mb-2 border-b-2 border-blue-500 inline-block">Medical Skills</h3>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {['Pharmacy Practice', 'Med Safety', 'Clinical Research', 'Infection Control'].map(s => (
+                  <span key={s} className="bg-white border border-slate-300 px-2 py-1 rounded text-xs font-semibold">{s}</span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-bold text-slate-900 uppercase tracking-wider mb-2 border-b-2 border-blue-500 inline-block">Languages</h3>
+              <ul className="space-y-1 text-slate-600 mt-2">
+                <li>🇫🇷 French (Fluent)</li>
+                <li>🇬🇧 English (Good)</li>
+                <li>🇪🇸 Spanish (Good)</li>
+                <li>🇰🇪 Swahili (Good)</li>
+                <li>🇷🇼 Kinyarwanda (Native)</li>
               </ul>
             </div>
-          </section>
+          </div>
         </div>
-      </div>
 
-      <div className="mt-12 pt-6 border-t border-slate-200 flex justify-center no-print">
-        <button onClick={() => window.print()} className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition font-bold shadow-lg flex items-center gap-2">
-          <span>🖨️</span> Print / Save PDF
-        </button>
+        {/* RIGHT COLUMN (MAIN CONTENT) */}
+        <div className="w-full md:w-2/3 p-6 md:p-12 text-left">
+          <div className="mb-8">
+            <h1 className="text-4xl font-serif font-bold text-slate-900 mb-2">Bonheur Irumva</h1>
+            <p className="text-blue-600 font-bold tracking-wide uppercase text-sm">Student Pharmacist | AI & Cybersecurity Enthusiast</p>
+          </div>
+
+          <p className="text-slate-600 italic mb-8 border-l-4 border-slate-200 pl-4">
+            Motivated Pharmacy student at INES Ruhengeri with a strong science background and a unique passion for the intersection of healthcare, AI, and technology. I bridge the gap between medical practice and digital innovation.
+          </p>
+
+          <div className="space-y-8">
+            <section>
+              <h2 className="text-lg font-bold text-slate-900 uppercase tracking-wider border-b border-slate-200 pb-2 mb-4">Education</h2>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between font-bold text-slate-800">
+                    <span>Bachelor of Pharmacy (BPharm)</span>
+                    <span className="text-slate-500 text-sm">Current</span>
+                  </div>
+                  <div className="text-blue-600 text-sm">INES Ruhengeri</div>
+                </div>
+                <div>
+                  <div className="flex justify-between font-bold text-slate-800">
+                    <span>A-Level (MCB)</span>
+                    <span className="text-slate-500 text-sm">2023 – 2025</span>
+                  </div>
+                  <div className="text-blue-600 text-sm">G.S REMERA RUKOMA</div>
+                </div>
+                <div>
+                  <div className="flex justify-between font-bold text-slate-800">
+                    <span>O-Level Education</span>
+                    <span className="text-slate-500 text-sm">2019 – 2022</span>
+                  </div>
+                  <div className="text-blue-600 text-sm">E.S Kanombe / EFOTEC</div>
+                </div>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-lg font-bold text-slate-900 uppercase tracking-wider border-b border-slate-200 pb-2 mb-4">Experience</h2>
+              <div>
+                <div className="flex justify-between font-bold text-slate-800">
+                  <span>Anti-AIDS Club Assistant</span>
+                  <span className="text-slate-500 text-sm">2024</span>
+                </div>
+                <div className="text-blue-600 text-sm mb-2">École de Dieu</div>
+                <ul className="list-disc list-inside text-sm text-slate-600 space-y-1">
+                  <li>Assisted in health awareness and prevention activities regarding HIV/AIDS.</li>
+                  <li>Supported teamwork and student engagement programs.</li>
+                  <li>Facilitated peer communication for better health outcomes.</li>
+                </ul>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-lg font-bold text-slate-900 uppercase tracking-wider border-b border-slate-200 pb-2 mb-4">References</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-slate-50 p-3 rounded">
+                  <div className="font-bold text-slate-900 text-sm">RUHIGANDE Aaron</div>
+                  <div className="text-xs text-slate-500 uppercase mb-1">Headmaster, G.S Remera Rukoma</div>
+                  <div className="text-sm">📞 0788410325</div>
+                </div>
+                <div className="bg-slate-50 p-3 rounded">
+                  <div className="font-bold text-slate-900 text-sm">TUMUKUNDE L. Monique</div>
+                  <div className="text-xs text-slate-500 uppercase mb-1">Headmistress, E.S Kanombe</div>
+                  <div className="text-sm">📧 eskanombe@gmail.com</div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div className="mt-12 pt-6 border-t border-slate-200 flex justify-center no-print">
+            <button onClick={() => window.print()} className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition font-bold shadow-lg flex items-center gap-2">
+              <span>🖨️</span> Print / Save PDF
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
