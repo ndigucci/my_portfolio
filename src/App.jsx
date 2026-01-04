@@ -459,9 +459,9 @@ function App() {
                 <Typewriter text="Pharmacy Student | AI Enthusiast" delay={55} />
                 <span className="animate-pulse ml-1">_</span>
               </div>
-              <p className={`${theme.subText} text-lg mb-8 max-w-xl mx-auto md:mx-0`}>
-                A 3rd Year Pharmacy Student & Tech Enthusiast based in Rwanda. I build digital solutions that make healthcare safer and smarter.
-              </p>
+              <p className="text-gray-400 text-lg mb-10 leading-relaxed max-w-2xl mx-auto md:mx-0">
+              I bridge the gap between <span className="text-white font-semibold">Healthcare</span> and <span className="text-white font-semibold">Technology</span>, building digital solutions that enhance safety and efficiency in Africa and beyond.
+            </p>
               <div className="flex gap-4 justify-center md:justify-start">
                 <button onClick={() => scrollToSection('projects')} className="bg-cyan-600 px-8 py-3 rounded-lg text-white font-bold hover:bg-cyan-500 transition shadow-lg shadow-cyan-500/25">View Projects</button>
                 <button onClick={() => setShowCV(true)} className={`border ${theme.cardBorder} px-8 py-3 rounded-lg hover:bg-gray-500/10 transition flex items-center gap-2`}>
