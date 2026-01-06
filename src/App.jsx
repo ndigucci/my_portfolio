@@ -65,22 +65,83 @@ const certificateCategories = [
   {
     title: "🛡️ Cybersecurity & Tech",
     items: [
-      { title: "DTP BEGINNER AI & ML", issuer: "Cornerstone", date: "2024", image: "/bignner.jpg", link: "/biggner.jpg" },
-      { title: "DTP INTERMEDIATE AI&ML", issuer: "Cornerstone", date: "2025", image: "/cert2.jpg", link: "/cert2.jpg" },
-      { title: "DTP ADVANCED AI&ML", issuer: "Cornerstone", date: "2025", image: "/addv.jpg", link: "/addv.jpg" },
-      { title: "CYBERSECURITY FUNDAMENTALS", issuer: "IBM/Coursera", date: "2025", image: "/cyber.jpg", link: "/cyber.jpg" },
-      { title: "INTRO TO AI", issuer: "IBM/Coursera", date: "2025", image: "/intro.jpg", link: "/intro.jpg" },
-      { title: "PYTHON FOR DATA SCIENCE", issuer: "Google", date: "2025", image: "/pthon.jpg", link: "/pthon.jpg" },
-      { title: "ICT ESSENTIALS", issuer: "ICDL Africa", date: "2025", image: "/icdlo.jpg", link: "/icdlo.jpg" },
-      { title: "ICDL COURSE PROOF", issuer: "ICDL Africa", date: "2025", image: "/icdll.jpg", link: "/icdll.jpg" }
+      { title: "DTP BEGINNER AI & ML", 
+        issuer: "Cornerstone", 
+        date: "2024", 
+        image: "/bignner.jpg", 
+        link: "/biggner.jpg" 
+      },
+      { title: "DTP INTERMEDIATE AI&ML",
+       issuer: "Cornerstone", 
+       date: "2025", 
+       image: "/cert2.jpg", 
+       link: "/cert2.jpg" 
+      },
+      { title: "DTP ADVANCED AI&ML", 
+        issuer: "Cornerstone", 
+        date: "2025", 
+        image: "/addv.jpg", 
+        link: "/addv.jpg" 
+      },
+      { title: "CYBERSECURITY FUNDAMENTALS", 
+        issuer: "IBM/Coursera", 
+        date: "2025", 
+        image: "/cyber.jpg", 
+        link: "/cyber.jpg" 
+      },
+      { title: "INTRO TO AI", 
+        issuer: "IBM/Coursera", 
+        date: "2025", 
+        image: "/intro.jpg", 
+        link: "/intro.jpg" 
+      },
+      { title: "PYTHON FOR DATA SCIENCE", 
+        issuer: "Google", 
+        date: "2025", 
+        image: "/pthon.jpg", 
+        link: "/pthon.jpg" 
+      },
+      { title: "ICT ESSENTIALS", 
+        issuer: "ICDL Africa", 
+        date: "2025", 
+        image: "/icdlo.jpg", 
+        link: "/icdlo.jpg" 
+      },
+      { title: "ICDL COURSE PROOF", 
+        issuer: "ICDL Africa", 
+        date: "2025", 
+        image: "/icdll.jpg", 
+        link: "/icdll.jpg" 
+      },
+      {
+        title: "COMPLETION OF AI IMPACTS ON SOCIETY AND GOVERNMENT",
+        issuer: "apolitical/Google",
+        date: "2026",
+        image: "/apolitical.jpg",
+        link: "/apolitical.jpg"
+      }
     ]
   },
   {
     title: "💊 Healthcare & Research",
     items: [
-      { title: "RESEARCH COMMUNICATION", issuer: "WHO/TDR", date: "2025", image: "/image.jpg", link: "/image.jpg" },
-      { title: "Certified Pharmacy Researcher", issuer: "NPC", date: "2025", image: "/pharm.jpg", link: "/pharm.jpg" },
-      { title: "Problem Solving in Health", issuer: "MINICT", date: "2025", image: "/prob.jpg", link: "/prob.jpg" }
+      { title: "RESEARCH COMMUNICATION",
+       issuer: "WHO/TDR",
+      date: "2025", 
+      image: "/image.jpg", 
+      link: "/image.jpg" 
+    },
+      { title: "Certified Pharmacy Researcher", 
+        issuer: "NPC", 
+        date: "2025", 
+        image: "/pharm.jpg", 
+        link: "/pharm.jpg" 
+      },
+      { title: "Problem Solving in Health", 
+        issuer: "MINICT", 
+        date: "2025", 
+        image: "/prob.jpg", 
+        link: "/prob.jpg" }
     ]
   }
 ];
