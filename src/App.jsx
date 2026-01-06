@@ -129,7 +129,7 @@ const certificateCategories = [
        issuer: "WHO/TDR",
       date: "2025", 
       image: "/image.jpg", 
-      link: "/image.jpg" 
+      link: "/https://tdrmooc.org/certificates/7f45a95c8bf949c1ab3597ff470caec9"
     },
       { title: "Certified Pharmacy Researcher", 
         issuer: "NPC", 
