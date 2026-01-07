@@ -84,13 +84,13 @@ const certificateCategories = [
         link: "/addv.jpg" 
       },
       { title: "CYBERSECURITY FUNDAMENTALS", 
-        issuer: "IBM/Coursera", 
+        issuer: "IBM|Coursera", 
         date: "2025", 
         image: "/cyber.jpg", 
         link: "/cyber.jpg" 
       },
       { title: "INTRO TO AI", 
-        issuer: "IBM/Coursera", 
+        issuer: "IBM|Coursera", 
         date: "2025", 
         image: "/intro.jpg", 
         link: "/intro.jpg" 
@@ -115,7 +115,7 @@ const certificateCategories = [
       },
       {
         title: "COMPLETION OF AI IMPACTS ON SOCIETY AND GOVERNMENT",
-        issuer: "apolitical/Google",
+        issuer: "apolitical|Google",
         date: "2026",
         image: "/apolitical.jpg",
         link: "/apolitical.jpg"
@@ -126,7 +126,7 @@ const certificateCategories = [
     title: "💊 Healthcare & Research",
     items: [
       { title: "RESEARCH COMMUNICATION",
-       issuer: "WHO/TDR",
+       issuer: "WHO|TDR",
       date: "2025", 
       image: "/image.jpg", 
       link: "/https://tdrmooc.org/certificates/7f45a95c8bf949c1ab3597ff470caec9"
@@ -141,7 +141,27 @@ const certificateCategories = [
         issuer: "MINICT", 
         date: "2025", 
         image: "/prob.jpg", 
-        link: "/prob.jpg" }
+        link: "/prob.jpg" 
+      },
+      {
+        title: "Health in climate negotiation",
+        issuer: "apolical",
+        date: "2026",
+        image: "/",
+        link:"/"
+      }
+    ]
+  },
+  {
+    title: "🤝OTHER CERTIFICATES",
+    items: [
+      {
+        title: "",
+        issuer: "",
+        date: "",
+        image: "/",
+        link: "/"      
+      }
     ]
   }
 ];
