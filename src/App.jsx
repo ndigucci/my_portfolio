@@ -726,6 +726,11 @@ function App() {
           </div>
         </section>
       </RevealOnScroll>
+      {showScrollBtn && (
+        <button onClick={scrollToTop} className="fixed bottom-8 right-8 bg-cyan-600 text-white p-3 rounded-full shadow-lg hover:bg-cyan-500 transition-transform hover:-translate-y-1 z-50">
+          ↑
+        </button>
+      )}
 
       {/* --- FOOTER --- */}
       <footer className="py-8 text-center text-gray-600 text-sm bg-black border-t border-gray-900">
