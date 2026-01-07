@@ -727,7 +727,7 @@ function App() {
         </section>
       </RevealOnScroll>
       {showScrollBtn && (
-        <button onClick={scrollToTop} className="animated-bounce fixed bottom-8 right-8 bg-cyan-600 text-white p-4 rounded-full shadow-lg hover:bg-cyan-500 transition-transform hover:-translate-y-1">
+        <button onClick={scrollToTop} className="animated-bounce fixed bottom-8 right-8 bg-cyan-600 text-white p-4 circle rounded-full shadow-lg hover:bg-cyan-500 transition-transform">
           ↑
         </button>
       )}
