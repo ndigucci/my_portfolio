@@ -67,9 +67,9 @@ const certificateCategories = [
     items: [
       { title: "DTP BEGINNER AI & ML", 
         issuer: "Cornerstone", 
-        date: "2024", 
+        date: "2025", 
         image: "/bignner.jpg", 
-        link: "/biggner.jpg" 
+        link: "/bignner.jpg" 
       },
       { title: "DTP INTERMEDIATE AI&ML",
        issuer: "Cornerstone", 
