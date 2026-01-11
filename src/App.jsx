@@ -156,11 +156,11 @@ const certificateCategories = [
     title: "🤝OTHER CERTIFICATES",
     items: [
       {
-        title: "",
-        issuer: "",
-        date: "",
-        image: "/",
-        link: "/"      
+        title: "AI PROMPT ENGINEERING",
+        issuer: "1 MILLION PROMPTERS",
+        date: "2026",
+        image: "/prompt.jpg",
+        link: "/prompt.jpg"      
       }
     ]
   }
