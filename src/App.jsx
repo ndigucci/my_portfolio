@@ -161,6 +161,13 @@ const certificateCategories = [
         date: "2026",
         image: "/prompt.jpg",
         link: "/prompt.jpg"      
+      },
+      {
+        title:"DATA ANALYSIS WITH PYTHON",
+        issuer:"cognitive class | IBM",
+        date:"2026",
+        image:"dataanalysis.jpg",
+        link:"data analysis.jpg"
       }
     ]
   }
