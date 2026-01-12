@@ -195,20 +195,20 @@ const books = [
     id: 2,
     title: "Deep Work",
     author: "Cal Newport",
-    image: "/book2.jpg",
+    image: "/deepwork.jpg",
     desc: "Rules for focused success in a distracted world.",
     thoughts: "Essential reading for mastering complex topics like AI and Pharmacy.",
     tags: ["Productivity", "Focus"],
-    rating: "⭐⭐⭐⭐⭐"
+    rating: "⭐⭐⭐⭐"
   },
   {
     id: 3,
-    title: "Clean Code",
-    author: "Robert C. Martin",
-    image: "/book3.jpg",
-    desc: "A Handbook of Agile Software Craftsmanship.",
-    thoughts: "Helped me write cleaner, more maintainable React and Python code.",
-    tags: ["Coding", "Tech"],
+    title: "48 Laws of Power",
+    author: "Robert Greene",
+    image: "/48laws.jpg",
+    desc: "The definitive guide to gaining, observing, or defending against ultimate control.",
+    thoughts: "A fascinating look into human behavior and strategy, useful in both tech and life.",
+    tags: ["Behaviour", "Power"],
     rating: "⭐⭐⭐⭐"
   }
 ];
