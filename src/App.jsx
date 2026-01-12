@@ -208,7 +208,7 @@ const books = [
     image: "/48laws.jpg",
     desc: "The definitive guide to gaining, observing, or defending against ultimate control.",
     thoughts: "A fascinating look into human behavior and strategy, useful in both tech and life.",
-    tags: ["Behaviour", "Power"],
+    tags: ["Behavior", "Power"],
     rating: "⭐⭐⭐⭐"
   }
 ];
