@@ -66,19 +66,19 @@ const certificateCategories = [
     title: "🛡️ Cybersecurity & Tech",
     items: [
       { title: "DTP BEGINNER AI & ML", 
-        issuer: "Cornerstone", 
+        issuer: "Cornerstone | DTP", 
         date: "2025", 
         image: "/bignner.jpg", 
         link: "/bignner.jpg" 
       },
       { title: "DTP INTERMEDIATE AI&ML",
-       issuer: "Cornerstone", 
+       issuer: "Cornerstone | DTP", 
        date: "2025", 
        image: "/cert2.jpg", 
        link: "/cert2.jpg" 
       },
       { title: "DTP ADVANCED AI&ML", 
-        issuer: "Cornerstone", 
+        issuer: "Cornerstone | DTP", 
         date: "2025", 
         image: "/addv.jpg", 
         link: "/addv.jpg" 
