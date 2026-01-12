@@ -179,6 +179,40 @@ const blogs = [
   { id: 2, title: "Securing Patient Data", date: "Nov 10, 2025", category: "Cybersecurity", excerpt: "Why cybersecurity fundamentals are becoming mandatory for modern health professionals.", content: "Full article content here...", tags: ["Security", "Privacy"] }
 ];
 
+// --- DATA: BOOKS READ ---
+const books = [
+  {
+    id: 1,
+    title: "Atomic Habits",
+    author: "James Clear",
+    image: "/atomichabbit.jpg", // Make sure to add this image to public folder
+    desc: "An easy & proven way to build good habits & break bad ones.",
+    thoughts: "This book changed how I approach daily consistency in coding and research.",
+    tags: ["Growth", "Psychology"],
+    rating: "⭐⭐⭐⭐⭐"
+  },
+  {
+    id: 2,
+    title: "Deep Work",
+    author: "Cal Newport",
+    image: "/book2.jpg",
+    desc: "Rules for focused success in a distracted world.",
+    thoughts: "Essential reading for mastering complex topics like AI and Pharmacy.",
+    tags: ["Productivity", "Focus"],
+    rating: "⭐⭐⭐⭐⭐"
+  },
+  {
+    id: 3,
+    title: "Clean Code",
+    author: "Robert C. Martin",
+    image: "/book3.jpg",
+    desc: "A Handbook of Agile Software Craftsmanship.",
+    thoughts: "Helped me write cleaner, more maintainable React and Python code.",
+    tags: ["Coding", "Tech"],
+    rating: "⭐⭐⭐⭐"
+  }
+];
+
 // --- MODALS ---
 const ResearchModal = ({ project, onClose }) => (
   <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
@@ -230,6 +264,31 @@ const BlogModal = ({ blog, onClose }) => (
         <div className="text-gray-300 leading-7 space-y-4 whitespace-pre-line">
           {blog.content}
         </div>
+      </div>
+    </div>
+  </div>
+);
+
+const BookModal = ({ book, onClose }) => (
+  <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="bg-zinc-900 w-full max-w-3xl h-[80vh] relative animate-in zoom-in-95 duration-200 p-8 rounded-lg border border-gray-700 overflow-y-auto">
+      <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">✖</button>
+      <div className="flex flex-col md:flex-row gap-6 mb-6">
+        {book.image && (
+          <div className="w-full md:w-1/3 h-64 rounded-lg overflow-hidden border border-gray-700 shadow-lg">
+             <img src={book.image} alt={book.title} className="w-full h-full object-cover" />
+          </div>
+        )}
+        <div className="flex-1">
+          <h2 className="text-3xl font-bold text-white mb-1">{book.title}</h2>
+          <p className="text-cyan-400 font-mono text-sm mb-4">By {book.author}</p>
+          <div className="mb-4 text-yellow-400">{book.rating}</div>
+          <p className="text-gray-300 leading-relaxed italic">"{book.thoughts}"</p>
+        </div>
+      </div>
+      <div className="bg-black/30 p-6 rounded border border-gray-800">
+        <h3 className="text-white font-bold mb-2 border-b border-gray-700 pb-2">SUMMARY</h3>
+        <p className="text-gray-400">{book.desc}</p>
       </div>
     </div>
   </div>
@@ -420,6 +479,7 @@ const CryptoModal = ({ onClose }) => {
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
+  const [activeBook, setActiveBook] = useState(null);
   const [showCV, setShowCV] = useState(false);
   const [showCrypto, setShowCrypto] = useState(false);
   const [activeBlog, setActiveBlog] = useState(null);
@@ -493,6 +553,7 @@ function App() {
         {showCV && <CVModal onClose={() => setShowCV(false)} />}
         {showCrypto && <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90"><CryptoModal onClose={() => setShowCrypto(false)} /></div>}
         {activeBlog && <BlogModal blog={activeBlog} onClose={() => setActiveBlog(null)} />}
+        {activeBook && <BookModal book={activeBook} onClose={() => setActiveBook(null)} />}
 
         {/* --- NAV --- */}
         <nav className={`fixed w-full z-50 ${theme.navBg} backdrop-blur-md border-b ${theme.cardBorder} transition-colors duration-500`}>
@@ -691,6 +752,53 @@ function App() {
                     <button className={`text-sm font-bold ${theme.heading} flex items-center gap-2 group-hover:gap-3 transition-all`}>
                       Read Article <span className="text-cyan-500">→</span>
                     </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        </RevealOnScroll>
+
+        {/* --- BOOKS READ SECTION --- */}
+        <RevealOnScroll>
+          <section id="books" className="py-24 px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className={`text-3xl md:text-4xl font-bold ${theme.heading} mb-12 flex items-center`}>
+                <span className="text-cyan-500 mr-3">05.</span> Books I've Read
+              </h2>
+              <div className="grid md:grid-cols-3 gap-8">
+                {books.map((b, i) => (
+                  <div key={i} onClick={() => setActiveBook(b)} className={`group ${theme.cardBg} rounded-2xl border ${theme.cardBorder} hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-2 cursor-pointer overflow-hidden flex flex-col h-full shadow-lg`}>
+                    
+                    {/* BOOK COVER IMAGE */}
+                    <div className="h-64 w-full bg-gray-200 relative overflow-hidden">
+                      {b.image ? (
+                        <img src={b.image} alt={b.title} className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-transform duration-500" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-gray-800 text-white text-4xl">📚</div>
+                      )}
+                      <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm text-[10px] font-bold text-white px-2 py-1 rounded border border-white/10 uppercase">
+                        {b.rating}
+                      </div>
+                    </div>
+
+                    {/* BOOK DETAILS */}
+                    <div className="p-6 flex flex-col flex-grow">
+                      <h3 className={`text-xl font-bold ${theme.heading} mb-1 group-hover:text-cyan-500 transition-colors`}>{b.title}</h3>
+                      <p className="text-cyan-600 text-xs font-bold uppercase mb-3">{b.author}</p>
+                      <p className={`${theme.subText} text-sm mb-4 flex-grow line-clamp-3`}>{b.desc}</p>
+                      
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {b.tags.map(tag => (
+                          <span key={tag} className="text-[10px] bg-cyan-500/10 text-cyan-600 px-2 py-1 rounded font-mono border border-cyan-500/20">#{tag}</span>
+                        ))}
+                      </div>
+
+                      <div className="text-xs font-bold text-cyan-500 uppercase tracking-wider flex items-center gap-2 mt-auto">
+                        READ REVIEW
+                        <span className="transition-transform group-hover:translate-x-1">→</span>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
