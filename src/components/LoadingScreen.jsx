@@ -9,7 +9,7 @@ const LoadingScreen = ({ onComplete }) => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(onComplete, 500); // Wait 0.5s before fading out
+          setTimeout(onComplete, 500); // Wait 0.8s before fading out
           return 100;
         }
         return prev + 2; // Speed of loading
@@ -34,7 +34,7 @@ const LoadingScreen = ({ onComplete }) => {
       {/* 3. Progress Text & Bar */}
       <div className="w-64">
         <div className="flex justify-between text-xs text-gray-400 mb-2 font-mono">
-          <span>Preparing Experience...</span>
+          <span>welcome to my portfolio...</span>
           <span>{progress}%</span>
         </div>
         
