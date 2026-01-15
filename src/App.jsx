@@ -764,7 +764,7 @@ function App() {
           <section id="books" className="py-24 px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className={`text-3xl md:text-4xl font-bold ${theme.heading} mb-12 flex items-center`}>
-                <span className="text-cyan-500 mr-3">05.</span> Books I've Read
+                <span className="text-cyan-500 mr-3">05.</span> Books Read
               </h2>
               <div className="grid md:grid-cols-3 gap-8">
                 {books.map((b, i) => (
