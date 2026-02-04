@@ -559,7 +559,7 @@ function App() {
         <nav className={`fixed w-full z-50 ${theme.navBg} backdrop-blur-md border-b ${theme.cardBorder} transition-colors duration-500`}>
           <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <div onClick={() => scrollToSection('home')} className="font-bold text-xl cursor-pointer tracking-tighter hover:text-cyan-500 transition">
-              port<span className="text-cyan-500">folio</span>
+              Port<span className="text-cyan-500">Folio</span>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
