@@ -559,7 +559,7 @@ function App() {
         <nav className={`fixed w-full z-50 ${theme.navBg} backdrop-blur-md border-b ${theme.cardBorder} transition-colors duration-500`}>
           <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <div onClick={() => scrollToSection('home')} className="font-bold text-xl cursor-pointer tracking-tighter hover:text-cyan-500 transition">
-              NDI <span className="text-cyan-500">GUCCI</span>
+              port<span className="text-cyan-500">folio</span>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
@@ -849,7 +849,7 @@ function App() {
 
       {/* --- FOOTER --- */}
       <footer className="py-8 text-center text-gray-600 text-sm bg-black border-t border-gray-900">
-        <p className="font-mono mb-2">Designed & Built by NDI GUCCI</p>
+        <p className="font-mono mb-2">Designed & Built by IRUMVA BONHEUR</p>
         
         {/* Social Icons Container */}
         <div className="flex justify-center gap-6 mt-4">

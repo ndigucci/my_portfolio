@@ -29,7 +29,7 @@ const LoadingScreen = ({ onComplete }) => {
       </div>
 
       {/* 2. Your Name */}
-      <h1 className="text-3xl font-bold mb-2 tracking-wide uppercase">NDI GUCCI</h1>
+      <h1 className="text-3xl font-bold mb-2 tracking-wide uppercase">IRUMVA BONHEUR</h1>
 
       {/* 3. Progress Text & Bar */}
       <div className="w-64">
